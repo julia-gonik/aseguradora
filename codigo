@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# Variables para la ruta de los archivos y el namespace
+ruta="ruta/del/proyecto"
+namespace="Asegurdora.Aplicacion"
+
+# Caso de uso ModificarVehiculo
+echo "Creando ModificarVehiculoUseCase.cs..."
+cat << EOF > "$ruta/CasosDeUso/Vehiculo/ModificarVehiculoUseCase.cs"
+namespace $namespace
+{
+    public class ModificarVehiculoUseCase
+    {
+        private readonly IRepositorioVehiculo _repo;
+
+        public ModificarVehiculoUseCase(IRepositorioVehiculo repo)
+        {
+            _repo = repo;
+        }
+
+        public void Ejecutar(Vehiculo vehiculo)
+        {
+            _repo.ModificarVehiculo(vehiculo);
+        }
+    }
+}
+EOF
+
+# Caso de uso EliminarVehiculo
+echo "Creando EliminarVehiculoUseCase.cs..."
+cat << EOF > "$ruta/CasosDeUso/Vehiculo/EliminarVehiculoUseCase.cs"
+namespace $namespace
+{
+    public class EliminarVehiculoUseCase
+    {
+        private readonly IRepositorioVehiculo _repo;
+
+        public EliminarVehiculoUseCase(IRepositorioVehiculo repo)
+        {
+            _repo = repo;
+        }
+
+        public void Ejecutar(int id)
+        {
+            _repo.EliminarVehiculo(id);
+        }
+    }
+}
+EOF
+
+# Caso de uso ObtenerTodosLosVehiculos
+echo "Creando ObtenerTodosLosVehiculosUseCase.cs..."
+cat << EOF > "$ruta/CasosDeUso/Vehiculo/ObtenerTodosLosVehiculosUseCase.cs"
+namespace $namespace
+{
+    public class ObtenerTodosLosVehiculosUseCase
+    {
+        private readonly IRepositorioVehiculo _repo;
+
+        public ObtenerTodosLosVehiculosUseCase(IRepositorioVehiculo repo)
+        {
+            _repo = repo;
+        }
+
+        public List<Vehiculo> Ejecutar()
+        {
+            return _repo.ObtenerTodosLosVehiculos();
+        }
+    }
+}
+EOF
+
+echo "¡Código generado correctamente!"
