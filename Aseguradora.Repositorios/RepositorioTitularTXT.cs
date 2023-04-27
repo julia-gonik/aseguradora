@@ -9,11 +9,7 @@ public class RepositorioTitularTXT : IRepositorioTitular
 	{
 		try
 		{
-			 if (ListarTitulares().Any(t => t.DNI == titular.DNI))
-			{
-				throw new Exception($"Titular con DNI {titular.DNI} ya existe");
-			}
-
+		
 			int ultimoId = 0;
 
 			if (File.Exists(_nombreArch))
@@ -27,10 +23,15 @@ public class RepositorioTitularTXT : IRepositorioTitular
 					sr.ReadLine(); // nombre
 					sr.ReadLine(); // telefono
 					string titularDNI = sr.ReadLine() ?? "";
-					sr.ReadLine();
-					sr.ReadLine();
+					sr.ReadLine(); // correo
+					sr.ReadLine(); // direccion
 					// Almacenar el Id del titular leído
 					ultimoId = titularId;
+					
+					if (titularDNI == titular.DNI) 
+					{
+						throw new Exception($"Titular con DNI {titular.DNI} ya existe");
+					}
 				}
 			}
 
@@ -79,14 +80,14 @@ public class RepositorioTitularTXT : IRepositorioTitular
 		while (!sr.EndOfStream)
 		{
 			// Leer el Id y el nombre del titular
-			int Id = int.Parse(sr.ReadLine() ?? "");
-			string Nombre = sr.ReadLine() ?? "";
-			string Telefono = sr.ReadLine() ?? "";
-			string DNI = sr.ReadLine() ?? "";
-			string CorreoElectronico = sr.ReadLine() ?? "";
-			string Direccion = sr.ReadLine() ?? "";
-
-			if (Id == titular.Id)
+			int TitularId = int.Parse(sr.ReadLine() ?? "");
+			string TitularNombre = sr.ReadLine() ?? "";
+			string TitularTelefono = sr.ReadLine() ?? "";
+			string TitularDNI = sr.ReadLine() ?? "";
+			string TitularCorreoElectronico = sr.ReadLine() ?? "";
+			string TitularDireccion = sr.ReadLine() ?? "";
+			// Console.WriteLine("aaaaaaaaa {0}", titular);
+			if (TitularId == titular.Id)
 			{
 				// Escribir el nuevo titular en lugar del titular original
 				sw.WriteLine(titular.Id);
@@ -99,12 +100,12 @@ public class RepositorioTitularTXT : IRepositorioTitular
 			else
 			{
 				// Escribir el titular original en el archivo temporal
-				sw.WriteLine(titular.Id);
-				sw.WriteLine(titular.Nombre);
-				sw.WriteLine(titular.Telefono);
-				sw.WriteLine(titular.DNI);
-				sw.WriteLine(titular.CorreoElectronico);
-				sw.WriteLine(titular.Direccion);
+				sw.WriteLine(TitularId);
+				sw.WriteLine(TitularNombre);
+				sw.WriteLine(TitularTelefono);
+				sw.WriteLine(TitularDNI);
+				sw.WriteLine(TitularCorreoElectronico);
+				sw.WriteLine(TitularDireccion);
 			}
 		}
 
