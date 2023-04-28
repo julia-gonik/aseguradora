@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/calvo/trabajo/Aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
+      "projectUniqueName": "/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
       "projectName": "Aseguradora.Aplicacion",
-      "projectPath": "/home/calvo/trabajo/Aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
+      "projectPath": "/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
       "packagesPath": "/home/calvo/.nuget/packages/",
-      "outputPath": "/home/calvo/trabajo/Aseguradora/Aseguradora.Aplicacion/obj/",
+      "outputPath": "/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/calvo/.nuget/NuGet/NuGet.Config"

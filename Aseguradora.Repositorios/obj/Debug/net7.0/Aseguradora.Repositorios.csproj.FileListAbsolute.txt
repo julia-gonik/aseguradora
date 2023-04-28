@@ -1,0 +1,15 @@
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/bin/Debug/net7.0/Aseguradora.Repositorios.deps.json
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/bin/Debug/net7.0/Aseguradora.Repositorios.dll
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/bin/Debug/net7.0/Aseguradora.Repositorios.pdb
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/bin/Debug/net7.0/Aseguradora.Aplicacion.dll
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/bin/Debug/net7.0/Aseguradora.Aplicacion.pdb
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/obj/Debug/net7.0/Aseguradora.Repositorios.csproj.AssemblyReference.cache
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/obj/Debug/net7.0/Aseguradora.Repositorios.GeneratedMSBuildEditorConfig.editorconfig
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/obj/Debug/net7.0/Aseguradora.Repositorios.AssemblyInfoInputs.cache
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/obj/Debug/net7.0/Aseguradora.Repositorios.AssemblyInfo.cs
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/obj/Debug/net7.0/Aseguradora.Repositorios.csproj.CoreCompileInputs.cache
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/obj/Debug/net7.0/Aseguradora.Repositorios.csproj.CopyComplete
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/obj/Debug/net7.0/Aseguradora.Repositorios.dll
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/obj/Debug/net7.0/refint/Aseguradora.Repositorios.dll
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/obj/Debug/net7.0/Aseguradora.Repositorios.pdb
+/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/obj/Debug/net7.0/ref/Aseguradora.Repositorios.dll

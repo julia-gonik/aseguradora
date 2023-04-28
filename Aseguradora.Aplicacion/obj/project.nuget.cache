@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "k3IUKxNjJ2YMcOZI+ANndXtaPrG53JB3BXSYXRDl5zPI/dFyQu3fGEgeYUGtP3STAutRUNn1ggoFFL4TgNIvWA==",
+  "dgSpecHash": "RFfCcjxA4XsbFmp+j5TtGm4AltbrQHH2aUnvviMU1+9kVMMs3L4LtFc+VFfDjWO1ZLHvx50JpA1smt5l/ADoBQ==",
   "success": true,
-  "projectFilePath": "/home/calvo/trabajo/Aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
+  "projectFilePath": "/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

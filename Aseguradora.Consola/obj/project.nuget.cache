@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mkaJHW6m1iY1ZhE9TXyQAy40dr19qxInOkI2G+HS2bA64V5lfBxcncqP3lZRjBRiMpzOFuW+Y9ICRUf/oyLdIA==",
+  "dgSpecHash": "t7MWCKiDNty3RC2sFpAw7nyKByiXgyTjAejr/z3yFwJswwPiPV7LewvafJVcgDZGdVK1GsnyZZGo9DNqSBmOLw==",
   "success": true,
-  "projectFilePath": "/home/calvo/trabajo/Aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj",
+  "projectFilePath": "/home/calvo/trabajo/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

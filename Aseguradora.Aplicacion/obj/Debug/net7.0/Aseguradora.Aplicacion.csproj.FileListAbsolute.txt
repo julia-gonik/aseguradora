@@ -1,0 +1,12 @@
+/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/bin/Debug/net7.0/Aseguradora.Aplicacion.deps.json
+/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/bin/Debug/net7.0/Aseguradora.Aplicacion.dll
+/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/bin/Debug/net7.0/Aseguradora.Aplicacion.pdb
+/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/obj/Debug/net7.0/Aseguradora.Aplicacion.csproj.AssemblyReference.cache
+/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/obj/Debug/net7.0/Aseguradora.Aplicacion.GeneratedMSBuildEditorConfig.editorconfig
+/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/obj/Debug/net7.0/Aseguradora.Aplicacion.AssemblyInfoInputs.cache
+/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/obj/Debug/net7.0/Aseguradora.Aplicacion.AssemblyInfo.cs
+/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/obj/Debug/net7.0/Aseguradora.Aplicacion.csproj.CoreCompileInputs.cache
+/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/obj/Debug/net7.0/Aseguradora.Aplicacion.dll
+/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/obj/Debug/net7.0/refint/Aseguradora.Aplicacion.dll
+/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/obj/Debug/net7.0/Aseguradora.Aplicacion.pdb
+/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/obj/Debug/net7.0/ref/Aseguradora.Aplicacion.dll
