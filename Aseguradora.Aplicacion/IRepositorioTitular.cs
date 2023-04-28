@@ -1,10 +1,9 @@
-namespace Aseguradora.Aplicacion
+namespace Aseguradora.Aplicacion;
+
+public interface IRepositorioTitular
 {
-    public interface IRepositorioTitular
-    {
-        void AgregarTitular(Titular titular);
-        void ModificarTitular(Titular titular);
-        void EliminarTitular(int id);
-        List<Titular> ListarTitulares();
-    }
+    public void AgregarTitular(Titular titular);
+    public List<Titular> ListarTitulares();
+    public void ModificarTitular(Titular titular);
+    public void EliminarTitular(int id);
 }

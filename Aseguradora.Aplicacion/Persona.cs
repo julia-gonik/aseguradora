@@ -3,9 +3,9 @@ namespace Aseguradora.Aplicacion;
 public abstract class Persona
 {
     public int Id { get; set; }
-    public int DNI { get; set;}
+    public string DNI { get; set;} = "00000000";
     public string Nombre { get; set; } = "";
-    public int telefono { get; set; }
+    public string Telefono { get; set; } = "00000000";
     
     public override string ToString()
     {
