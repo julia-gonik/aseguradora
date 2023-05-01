@@ -5,6 +5,7 @@ namespace Aseguradora.Aplicacion
         void AgregarVehiculo(Vehiculo vehiculo);
         void ModificarVehiculo(Vehiculo vehiculo);
         void EliminarVehiculo(int id);
+        List<Vehiculo> ListarVehiculosTitular(int id); //id del titular
         List<Vehiculo> ListarVehiculos();
     }
 }
