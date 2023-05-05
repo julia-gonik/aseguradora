@@ -68,6 +68,7 @@ public class RepositorioTitularTXT : IRepositorioTitular
 		return resultado;
 	}
 
+
 	public void ModificarTitular(Titular titular)
 	{
 		string archivoTemporal = "titulares_temp.txt";
@@ -77,6 +78,9 @@ public class RepositorioTitularTXT : IRepositorioTitular
 
 		// Abrir el archivo original para leer los titulares
 		using var sr = new StreamReader(_nombreArch);
+		
+		bool found = false;
+		
 		while (!sr.EndOfStream)
 		{
 			// Leer el Id y el nombre del titular
@@ -87,7 +91,7 @@ public class RepositorioTitularTXT : IRepositorioTitular
 			string TitularCorreoElectronico = sr.ReadLine() ?? "";
 			string TitularDireccion = sr.ReadLine() ?? "";
 			// Console.WriteLine("aaaaaaaaa {0}", titular);
-			if (TitularId == titular.Id)
+			if (TitularDNI == titular.DNI)
 			{
 				// Escribir el nuevo titular en lugar del titular original
 				sw.WriteLine(titular.Id);
@@ -96,6 +100,7 @@ public class RepositorioTitularTXT : IRepositorioTitular
 				sw.WriteLine(titular.DNI);
 				sw.WriteLine(titular.CorreoElectronico);
 				sw.WriteLine(titular.Direccion);
+				found = true;
 			}
 			else
 			{
@@ -112,6 +117,11 @@ public class RepositorioTitularTXT : IRepositorioTitular
 		// Eliminar el archivo original y renombrar el archivo temporal con el nombre del archivo original
 		File.Delete(_nombreArch);
 		File.Move(archivoTemporal, _nombreArch);
+		
+		if (!found) 
+		{
+			throw new Exception($"No se ha encontrado el titular {titular} a modificar");
+		}
 	}
 
 	public void EliminarTitular(int id)
@@ -121,6 +131,7 @@ public class RepositorioTitularTXT : IRepositorioTitular
 			string archivoTemporal = "titulares_temp.txt";
 			using var sr = new StreamReader(_nombreArch);
 			using var sw = new StreamWriter(archivoTemporal); //hay uno para cosas temp pero ningans de usar
+			bool found = false;
 			
 			while (!sr.EndOfStream)
 			{
@@ -142,14 +153,31 @@ public class RepositorioTitularTXT : IRepositorioTitular
 					sw.WriteLine(CorreoElectronico);
 					sw.WriteLine(Direccion);
 				}
+				else
+				{
+					found = true;						
+				}
 			}
 
 			File.Delete(_nombreArch);
 			File.Move(archivoTemporal, _nombreArch);
+			
+			if (!found) 
+			{
+				throw new Exception($"No se ha encontrado el titular con id {id} a eliminar");
+			}
 		}
 		catch (Exception ex)
 		{
 			Console.WriteLine("Ocurrió un error: " + ex.Message);
 		}
+	}
+	
+	public Titular ObtenerVehiculosDeTitular(Titular titular, Func<int, List<Vehiculo>> listaVehiculos) 
+	{
+		titular.Vehiculos = listaVehiculos(titular.Id);
+		
+		Console.WriteLine(titular);
+		return titular; 
 	}
 }
