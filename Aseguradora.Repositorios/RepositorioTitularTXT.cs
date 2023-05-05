@@ -68,6 +68,7 @@ public class RepositorioTitularTXT : IRepositorioTitular
 		return resultado;
 	}
 
+
 	public void ModificarTitular(Titular titular)
 	{
 		string archivoTemporal = "titulares_temp.txt";
@@ -151,5 +152,13 @@ public class RepositorioTitularTXT : IRepositorioTitular
 		{
 			Console.WriteLine("Ocurrió un error: " + ex.Message);
 		}
+	}
+	
+	public Titular ObtenerVehiculosDeTitular(Titular titular, Func<int, List<Vehiculo>> listaVehiculos) 
+	{
+		titular.Vehiculos = listaVehiculos(titular.Id);
+		
+		Console.WriteLine(titular);
+		return titular; 
 	}
 }
