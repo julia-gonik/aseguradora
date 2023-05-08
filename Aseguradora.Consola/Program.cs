@@ -16,6 +16,13 @@ EliminarVehiculoUseCase eliminarVehiculo = new EliminarVehiculoUseCase(repoVehic
 
 ListarTitularesConSusVehiculosUseCase ListarTitularesConSusVehiculos = new ListarTitularesConSusVehiculosUseCase(repoVehiculo, repoTitular);
 
+IRepositorioPoliza repoPoliza = new RepositorioPolizaTXT();
+AgregarPolizaUseCase agregarPoliza = new AgregarPolizaUseCase(repoPoliza);
+ListarPolizasUseCase listarPolizas = new ListarPolizasUseCase(repoPoliza);
+ModificarPolizaUseCase modificarPoliza = new ModificarPolizaUseCase(repoPoliza);
+EliminarPolizaUseCase eliminarPoliza = new EliminarPolizaUseCase(repoPoliza);
+
+
 //Instanciamos titulares
 Titular titular = new Titular {
 	Nombre = "García Juan",
@@ -184,3 +191,137 @@ eliminarVehiculo.Ejecutar(20);
 
 
 ListarTitularesConSusVehiculos.Ejecutar();
+
+
+Poliza poliza1 = new Poliza
+{
+	IdVehiculoAsegurado = 1,
+	ValorAsegurado = 5000,
+	Franquicia = "1000",
+	TipoCobertura = TipoCobertura.TodoRiesgo,
+	FechaInicioVigencia = new DateTime(2023, 5, 8),
+	FechaFinVigencia = new DateTime(2023, 6, 8)
+};
+
+Poliza poliza2 = new Poliza
+{
+	IdVehiculoAsegurado = 2,
+	ValorAsegurado = 7000,
+	Franquicia = "1500",
+	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
+	FechaInicioVigencia = new DateTime(2023, 5, 8),
+	FechaFinVigencia = new DateTime(2023, 7, 8)
+};
+
+Poliza poliza3 = new Poliza
+{
+	IdVehiculoAsegurado = 3,
+	ValorAsegurado = 10000,
+	Franquicia = "2000",
+	TipoCobertura = TipoCobertura.TodoRiesgo,
+	FechaInicioVigencia = new DateTime(2023, 5, 8),
+	FechaFinVigencia = new DateTime(2023, 8, 8)
+};
+
+Poliza poliza4 = new Poliza
+{
+	IdVehiculoAsegurado = 4,
+	ValorAsegurado = 8000,
+	Franquicia = "1200",
+	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
+	FechaInicioVigencia = new DateTime(2023, 5, 8),
+	FechaFinVigencia = new DateTime(2023, 9, 8)
+};
+
+Poliza poliza5 = new Poliza
+{
+	IdVehiculoAsegurado = 5,
+	ValorAsegurado = 6000,
+	Franquicia = "1000",
+	TipoCobertura = TipoCobertura.TodoRiesgo,
+	FechaInicioVigencia = new DateTime(2023, 5, 8),
+	FechaFinVigencia = new DateTime(2023, 10, 8)
+};
+
+Poliza poliza6 = new Poliza
+{
+	IdVehiculoAsegurado = 6,
+	ValorAsegurado = 12000,
+	Franquicia = "2500",
+	TipoCobertura = TipoCobertura.TodoRiesgo,
+	FechaInicioVigencia = new DateTime(2023, 5, 8),
+	FechaFinVigencia = new DateTime(2023, 11, 8)
+};
+
+Poliza poliza7 = new Poliza
+{
+	IdVehiculoAsegurado = 7,
+	ValorAsegurado = 9000,
+	Franquicia = "1800",
+	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
+	FechaInicioVigencia = new DateTime(2023, 5, 8),
+	FechaFinVigencia = new DateTime(2023, 12, 8)
+};
+
+Poliza poliza8 = new Poliza
+{
+	IdVehiculoAsegurado = 8,
+	ValorAsegurado = 3000,
+	Franquicia = "500",
+	TipoCobertura = TipoCobertura.TodoRiesgo,
+	FechaInicioVigencia = new DateTime(2023, 5, 8),
+	FechaFinVigencia = new DateTime(2023, 12, 8)
+};
+
+Poliza poliza5Modificado = new Poliza 
+{ 
+	Id = 5,
+	IdVehiculoAsegurado = 7,
+	ValorAsegurado = 9000,
+	Franquicia = "1800",
+	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
+	FechaInicioVigencia = new DateTime(2023, 5, 8),
+	FechaFinVigencia = new DateTime(2023, 12, 8)
+};
+
+Poliza poliza6Modificado = new Poliza 
+{ 
+	Id = 6, 
+	IdVehiculoAsegurado = 7,
+	ValorAsegurado = 9000,
+	Franquicia = "1800",
+	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
+	FechaInicioVigencia = new DateTime(2023, 5, 8),
+	FechaFinVigencia = new DateTime(2023, 12, 8) 
+};
+
+Poliza polizaNoEncontrada = new Poliza 
+{ 
+	Id = 100,
+	IdVehiculoAsegurado = 7,
+	ValorAsegurado = 9000,
+	Franquicia = "1800",
+	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
+	FechaInicioVigencia = new DateTime(2023, 5, 8),
+	FechaFinVigencia = new DateTime(2023, 12, 8) 
+};
+
+agregarPoliza.Ejecutar(poliza1);
+agregarPoliza.Ejecutar(poliza2);
+agregarPoliza.Ejecutar(poliza3);
+agregarPoliza.Ejecutar(poliza4);
+agregarPoliza.Ejecutar(poliza5);
+agregarPoliza.Ejecutar(poliza6);
+agregarPoliza.Ejecutar(poliza7);
+
+
+modificarPoliza.Ejecutar(poliza5Modificado);
+modificarPoliza.Ejecutar(poliza6Modificado);
+modificarPoliza.Ejecutar(polizaNoEncontrada);
+
+
+int idPoliza = 3;
+int idPolizaNoEncontrado = 100;
+
+eliminarPoliza.Ejecutar(idPoliza);
+eliminarPoliza.Ejecutar(idPolizaNoEncontrado);

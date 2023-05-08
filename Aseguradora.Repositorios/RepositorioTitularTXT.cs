@@ -9,7 +9,6 @@ public class RepositorioTitularTXT : IRepositorioTitular
 	{
 		try
 		{
-		
 			int ultimoId = 0;
 
 			if (File.Exists(_nombreArch))

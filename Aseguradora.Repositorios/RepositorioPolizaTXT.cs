@@ -4,18 +4,36 @@ namespace Aseguradora.Repositorios;
 
 public class RepositorioPolizaTXT : IRepositorioPoliza
 {
-	private readonly string _nombreArchivo;
-
-	public RepositorioPolizaTXT(string nombreArchivo)
-	{
-		_nombreArchivo = nombreArchivo;
-	}
+	readonly string _nombreArch = "polizas.txt";
 
 	public void AgregarPoliza(Poliza poliza)
 	{
 		try
 		{
-			using var sw = new StreamWriter(_nombreArchivo, true);
+			int ultimoId = 0;
+
+			if (File.Exists(_nombreArch)) 
+			{
+				using var sr = new StreamReader(_nombreArch);
+				
+				while (!sr.EndOfStream)
+				{
+					// Leer el Id del polzia
+					int polizaId = int.Parse(sr.ReadLine() ?? "");
+					sr.ReadLine(); // IdVehiculoAsegurado
+					sr.ReadLine(); // ValorAsegurado
+					sr.ReadLine(); // Franquicia
+					sr.ReadLine(); // TipoCobertura
+					sr.ReadLine(); // FechaInicioVigencia
+					sr.ReadLine(); // FechaFinVigencia
+					
+					ultimoId = polizaId;
+				}
+			}
+			
+			poliza.Id = ultimoId + 1;
+			
+			using var sw = new StreamWriter(_nombreArch, true);
 			sw.WriteLine(poliza.Id);
 			sw.WriteLine(poliza.IdVehiculoAsegurado);
 			sw.WriteLine(poliza.ValorAsegurado);
@@ -23,6 +41,7 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 			sw.WriteLine(poliza.TipoCobertura);
 			sw.WriteLine(poliza.FechaInicioVigencia);
 			sw.WriteLine(poliza.FechaFinVigencia);
+
 		}
 		catch (Exception ex)
 		{
@@ -30,12 +49,14 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 		}
 	}
 
+
+
 	public void EliminarPoliza(int id)
 	{
 		try
 		{
 			string archivoTemporal = "polizas_temp.txt";
-			using var sr = new StreamReader(_nombreArchivo);
+			using var sr = new StreamReader(_nombreArch);
 			using var sw = new StreamWriter(archivoTemporal);
 			bool found = false;
 
@@ -65,8 +86,8 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 				}
 			}
 
-			File.Delete(_nombreArchivo);
-			File.Move(archivoTemporal, _nombreArchivo);
+			File.Delete(_nombreArch);
+			File.Move(archivoTemporal, _nombreArch);
 			
 			if (!found) 
 			{
@@ -82,7 +103,7 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 	public List<Poliza> ListarPolizas()
 	{
 		var polizas = new List<Poliza>();
-		using var sr = new StreamReader(_nombreArchivo);
+		using var sr = new StreamReader(_nombreArch);
 		while (!sr.EndOfStream)
 		{
 			var poliza = new Poliza();
@@ -104,7 +125,7 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 		try
 		{
 			string archivoTemporal = "polizas_temp.txt";
-			using var sr = new StreamReader(_nombreArchivo);
+			using var sr = new StreamReader(_nombreArch);
 			using var sw = new StreamWriter(archivoTemporal);
 			bool found = false;
 
@@ -141,8 +162,8 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 				}
 			}
 
-			File.Delete(_nombreArchivo);
-			File.Move(archivoTemporal, _nombreArchivo);
+			File.Delete(_nombreArch);
+			File.Move(archivoTemporal, _nombreArch);
 			
 			if (!found) 
 			{
