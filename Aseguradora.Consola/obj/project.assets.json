@@ -46,19 +46,19 @@
     ]
   },
   "packageFolders": {
-    "/home/calvo/.nuget/packages/": {}
+    "/home/julia/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/calvo/trabajo/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj",
+      "projectUniqueName": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj",
       "projectName": "Aseguradora.Consola",
-      "projectPath": "/home/calvo/trabajo/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj",
-      "packagesPath": "/home/calvo/.nuget/packages/",
-      "outputPath": "/home/calvo/trabajo/aseguradora/Aseguradora.Consola/obj/",
+      "projectPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj",
+      "packagesPath": "/home/julia/.nuget/packages/",
+      "outputPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Consola/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/calvo/.nuget/NuGet/NuGet.Config"
+        "/home/julia/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -70,11 +70,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {
-              "projectPath": "/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj"
+            "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {
+              "projectPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj"
             },
-            "/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj": {
-              "projectPath": "/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj"
+            "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj": {
+              "projectPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj"
             }
           }
         }

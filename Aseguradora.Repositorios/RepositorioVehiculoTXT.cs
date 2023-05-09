@@ -25,6 +25,11 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 					sr.ReadLine(); // Id del titular
 					// Almacenar el Id del vehículo leído
 					ultimoId = vehiculoId;
+					
+					if (vehiculoId == vehiculo.Id) 
+					{
+						throw new Exception($"Vehiculo con Id {vehiculo.Id} ya existe");
+					}
 				}
 			}
 
@@ -94,17 +99,21 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 	public List<Vehiculo> ListarVehiculos()
 	{
 		var resultado = new List<Vehiculo>();
-		using var sr = new StreamReader(_nombreArch);
-		while (!sr.EndOfStream)
+		if (File.Exists(_nombreArch))
 		{
-			var vehiculo = new Vehiculo();
-			vehiculo.Id = int.Parse(sr.ReadLine() ?? "");
-			vehiculo.Dominio = sr.ReadLine() ?? "";
-			vehiculo.Marca = sr.ReadLine() ?? "";
-			vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
-			vehiculo.IdTitular = int.Parse(sr.ReadLine() ?? "");
+			using var sr = new StreamReader(_nombreArch);
+		
+			while (!sr.EndOfStream)
+			{
+				var vehiculo = new Vehiculo();
+				vehiculo.Id = int.Parse(sr.ReadLine() ?? "");
+				vehiculo.Dominio = sr.ReadLine() ?? "";
+				vehiculo.Marca = sr.ReadLine() ?? "";
+				vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
+				vehiculo.IdTitular = int.Parse(sr.ReadLine() ?? "");
 
-			resultado.Add(vehiculo);
+				resultado.Add(vehiculo);
+			}
 		}
 		return resultado;
 	}
@@ -112,19 +121,22 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 	public List<Vehiculo> ListarVehiculosPorTitular(int idTitular)
 	{
 		var vehiculosTitular = new List<Vehiculo>();
-		using var sr = new StreamReader(_nombreArch);
-		while (!sr.EndOfStream)
+		if (File.Exists(_nombreArch))
 		{
-			var vehiculo = new Vehiculo();
-			vehiculo.Id = int.Parse(sr.ReadLine() ?? "");
-			vehiculo.Dominio = sr.ReadLine() ?? "";
-			vehiculo.Marca = sr.ReadLine() ?? "";
-			vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
-			vehiculo.IdTitular = int.Parse(sr.ReadLine() ?? "");
-
-			if (vehiculo.IdTitular == idTitular)
+			using var sr = new StreamReader(_nombreArch);
+			while (!sr.EndOfStream)
 			{
-				vehiculosTitular.Add(vehiculo);
+				var vehiculo = new Vehiculo();
+				vehiculo.Id = int.Parse(sr.ReadLine() ?? "");
+				vehiculo.Dominio = sr.ReadLine() ?? "";
+				vehiculo.Marca = sr.ReadLine() ?? "";
+				vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
+				vehiculo.IdTitular = int.Parse(sr.ReadLine() ?? "");
+
+				if (vehiculo.IdTitular == idTitular)
+				{
+					vehiculosTitular.Add(vehiculo);
+				}
 			}
 		}
 		return vehiculosTitular;

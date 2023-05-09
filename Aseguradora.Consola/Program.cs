@@ -24,7 +24,7 @@ ModificarPolizaUseCase modificarPoliza = new ModificarPolizaUseCase(repoPoliza);
 EliminarPolizaUseCase eliminarPoliza = new EliminarPolizaUseCase(repoPoliza);
 
 
-//Instanciamos titulares
+// Instanciamos titulares
 Titular titular = new Titular {
 	Nombre = "García Juan",
 	DNI = "33123456",
@@ -57,46 +57,53 @@ Titular titular4 = new Titular {
 	CorreoElectronico = "otroemail@gmail.com"
 };
 
-	Console.WriteLine($"Agregando titular {titular.DNI}");
-	agregarTitular.Ejecutar(titular);
-	Console.WriteLine($"Agregando titular {titular2.DNI}");
-	agregarTitular.Ejecutar(titular2);
-	Console.WriteLine($"Agregando titular {titular3.DNI}");
-	agregarTitular.Ejecutar(titular3);
+Console.WriteLine($"Agregando titular {titular.DNI}");
+agregarTitular.Ejecutar(titular);
 
-	Console.WriteLine($"Agregando titular {titular4.DNI}");
-	agregarTitular.Ejecutar(titular4);
-	
-	Console.WriteLine("Lista de titulares");
-	listarTitulares.Ejecutar().ForEach(titular => Console.WriteLine(titular));
+Console.WriteLine($"Agregando titular {titular2.DNI}");
+agregarTitular.Ejecutar(titular2);
 
-	Titular titularModificado = new Titular {
+Console.WriteLine($"Agregando titular {titular3.DNI}");
+agregarTitular.Ejecutar(titular3);
+
+Console.WriteLine($"Agregando titular {titular4.DNI}");
+agregarTitular.Ejecutar(titular4);
+
+Console.WriteLine("Lista de titulares");
+listarTitulares.Ejecutar().ForEach(titular => Console.WriteLine(titular));
+
+Titular titularModificado = new Titular {
 	Id = 2,
 	Nombre = "Alicia Raquel",
 	DNI = "42342345",
 	Direccion = "13 nro. 12",
 	Telefono = "221-904234",
 	CorreoElectronico = "otroemail@gmail.com"
-	};
+};
 
-	Titular titularModificadoNoExiste = new Titular {
+Titular titularModificadoNoExiste = new Titular {
 	Id = 2,
 	Nombre = "Maria Rodriguez",
 	DNI = "87654321",
 	Direccion = "55 nro. 204",
 	Telefono = "221-555567",
 	CorreoElectronico = "otroemail@gmail.com"
-	};
+};
 
-	Console.WriteLine($"Modificando titular con DNI {titularModificado.Id}");
-	modificarTitular.Ejecutar(titularModificado);
-	Console.WriteLine($"Modificando titular con DNI {titularModificadoNoExiste.Id}");
-	modificarTitular.Ejecutar(titularModificadoNoExiste);
+Console.WriteLine($"Modificando titular con DNI {titularModificado.Id}");
+modificarTitular.Ejecutar(titularModificado);
 
-	Console.WriteLine("Eliminando Vehiculo con Id 3");
-	eliminarTitular.Ejecutar(3);
-	Console.WriteLine("Eliminando Vehiculo con Id 16");
-	eliminarTitular.Ejecutar(16);
+Console.WriteLine($"Modificando titular con DNI {titularModificadoNoExiste.Id}");
+modificarTitular.Ejecutar(titularModificadoNoExiste);
+
+Console.WriteLine("Eliminando Vehiculo con Id 3");
+eliminarTitular.Ejecutar(3);
+
+Console.WriteLine("Eliminando Vehiculo con Id 16");
+eliminarTitular.Ejecutar(16);
+
+Console.WriteLine("Lista de titulares con los autos");
+ListarTitularesConSusVehiculos.Ejecutar().ForEach(titular => Console.WriteLine(titular));
 
 Vehiculo vehiculo1 = new Vehiculo 
 { 
@@ -180,13 +187,37 @@ Vehiculo vehiculo10 = new Vehiculo
 
 
 agregarVehiculo.Ejecutar(vehiculo1);
+Console.WriteLine($"Agregando Vehiculo {vehiculo1}");
+
 agregarVehiculo.Ejecutar(vehiculo2);
+Console.WriteLine($"Agregando Vehiculo {vehiculo2}");
+
 agregarVehiculo.Ejecutar(vehiculo3);
+Console.WriteLine($"Agregando Vehiculo {vehiculo3}");
+
 agregarVehiculo.Ejecutar(vehiculo4);
+Console.WriteLine($"Agregando Vehiculo {vehiculo4}");
+
 agregarVehiculo.Ejecutar(vehiculo5);
+Console.WriteLine($"Agregando Vehiculo {vehiculo5}");
+
 agregarVehiculo.Ejecutar(vehiculo6);
+Console.WriteLine($"Agregando Vehiculo {vehiculo6}");
+
 agregarVehiculo.Ejecutar(vehiculo7);
-	
+Console.WriteLine($"Agregando Vehiculo {vehiculo7}");
+
+
+agregarVehiculo.Ejecutar(new Vehiculo 
+{ 
+		Id = 5,
+		Dominio = "Agregando", 
+		Marca = "Ya existente", 
+		AnioFabricacion = 2017, 
+		IdTitular = 1 
+});
+
+
 Vehiculo vehiculo5Modificado = new Vehiculo 
 { 
 		Id = 5,
@@ -214,21 +245,33 @@ Vehiculo vehiculoNoEncontrado = new Vehiculo
 		IdTitular = 2 
 };
 
+
+Console.WriteLine($"Modificando vehiculo con Id {vehiculo5Modificado.Id}");
 modificarVehiculo.Ejecutar(vehiculo5Modificado);
+
+Console.WriteLine($"Modificando vehiculo con Id {vehiculo6Modificado.Id}");
 modificarVehiculo.Ejecutar(vehiculo6Modificado);
+
+Console.WriteLine($"Modificando vehiculo con Id {vehiculoNoEncontrado.Id}");
 modificarVehiculo.Ejecutar(vehiculoNoEncontrado);
 
 
+Console.WriteLine("Eliminando Vehiculo con Id 5");
 eliminarVehiculo.Ejecutar(5);
+Console.WriteLine("Eliminando Vehiculo con Id 20");
 eliminarVehiculo.Ejecutar(20);
 
-Console.WriteLine("Lista de titulares con los autos");
-ListarTitularesConSusVehiculos.Ejecutar();ListarTitularesConSusVehiculos.Ejecutar().ForEach(titular => Console.WriteLine(titular));
+
+Console.WriteLine("Lista de vehiculos");
+listarVehiculos.Ejecutar().ForEach(vehiculo => Console.WriteLine(vehiculo));
+
+Console.WriteLine("Lista de titulares con sus vehiculos");
+ListarTitularesConSusVehiculos.Ejecutar().ForEach(titular => Console.WriteLine(titular));;
 
 
 Poliza poliza1 = new Poliza
 {
-	IdVehiculoAsegurado = 1,
+	IdVehiculoAsegurado = 2,
 	ValorAsegurado = 5000,
 	Franquicia = "1000",
 	TipoCobertura = TipoCobertura.TodoRiesgo,
@@ -248,7 +291,7 @@ Poliza poliza2 = new Poliza
 
 Poliza poliza3 = new Poliza
 {
-	IdVehiculoAsegurado = 3,
+	IdVehiculoAsegurado = 2,
 	ValorAsegurado = 10000,
 	Franquicia = "2000",
 	TipoCobertura = TipoCobertura.TodoRiesgo,
@@ -258,7 +301,7 @@ Poliza poliza3 = new Poliza
 
 Poliza poliza4 = new Poliza
 {
-	IdVehiculoAsegurado = 4,
+	IdVehiculoAsegurado = 2,
 	ValorAsegurado = 8000,
 	Franquicia = "1200",
 	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
@@ -268,7 +311,7 @@ Poliza poliza4 = new Poliza
 
 Poliza poliza5 = new Poliza
 {
-	IdVehiculoAsegurado = 5,
+	IdVehiculoAsegurado = 2,
 	ValorAsegurado = 6000,
 	Franquicia = "1000",
 	TipoCobertura = TipoCobertura.TodoRiesgo,
@@ -278,7 +321,7 @@ Poliza poliza5 = new Poliza
 
 Poliza poliza6 = new Poliza
 {
-	IdVehiculoAsegurado = 6,
+	IdVehiculoAsegurado = 2,
 	ValorAsegurado = 12000,
 	Franquicia = "2500",
 	TipoCobertura = TipoCobertura.TodoRiesgo,
@@ -288,7 +331,7 @@ Poliza poliza6 = new Poliza
 
 Poliza poliza7 = new Poliza
 {
-	IdVehiculoAsegurado = 7,
+	IdVehiculoAsegurado = 2,
 	ValorAsegurado = 9000,
 	Franquicia = "1800",
 	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
@@ -296,24 +339,45 @@ Poliza poliza7 = new Poliza
 	FechaFinVigencia = new DateTime(2023, 12, 8)
 };
 
-Poliza poliza8 = new Poliza
-{
-	IdVehiculoAsegurado = 8,
-	ValorAsegurado = 3000,
-	Franquicia = "500",
-	TipoCobertura = TipoCobertura.TodoRiesgo,
+agregarPoliza.Ejecutar(poliza1);
+Console.WriteLine($"Agregando Poliza {poliza1}");
+
+agregarPoliza.Ejecutar(poliza2);
+Console.WriteLine($"Agregando Poliza {poliza2}");
+
+agregarPoliza.Ejecutar(poliza3);
+Console.WriteLine($"Agregando Poliza {poliza3}");
+
+agregarPoliza.Ejecutar(poliza4);
+Console.WriteLine($"Agregando Poliza {poliza4}");
+
+agregarPoliza.Ejecutar(poliza5);
+Console.WriteLine($"Agregando Poliza {poliza5}");
+
+agregarPoliza.Ejecutar(poliza6);
+Console.WriteLine($"Agregando Poliza {poliza6}");
+
+agregarPoliza.Ejecutar(poliza7);
+Console.WriteLine($"Agregando Poliza {poliza7}");
+
+Console.WriteLine($"Agregando Poliza existente");
+
+agregarPoliza.Ejecutar(new Poliza 
+{ 
+	Id = 5,
+	IdVehiculoAsegurado = 2,
+	ValorAsegurado = 9000,
+	Franquicia = "1800",
+	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
 	FechaInicioVigencia = new DateTime(2023, 5, 8),
 	FechaFinVigencia = new DateTime(2023, 12, 8)
-};
-
-
-
+});
 
 
 Poliza poliza5Modificado = new Poliza 
 { 
 	Id = 5,
-	IdVehiculoAsegurado = 7,
+	IdVehiculoAsegurado = 2,
 	ValorAsegurado = 9000,
 	Franquicia = "1800",
 	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
@@ -324,7 +388,7 @@ Poliza poliza5Modificado = new Poliza
 Poliza poliza6Modificado = new Poliza 
 { 
 	Id = 6, 
-	IdVehiculoAsegurado = 7,
+	IdVehiculoAsegurado = 2,
 	ValorAsegurado = 9000,
 	Franquicia = "1800",
 	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
@@ -335,7 +399,7 @@ Poliza poliza6Modificado = new Poliza
 Poliza polizaNoEncontrada = new Poliza 
 { 
 	Id = 100,
-	IdVehiculoAsegurado = 7,
+	IdVehiculoAsegurado = 2,
 	ValorAsegurado = 9000,
 	Franquicia = "1800",
 	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
@@ -343,22 +407,24 @@ Poliza polizaNoEncontrada = new Poliza
 	FechaFinVigencia = new DateTime(2023, 12, 8) 
 };
 
-agregarPoliza.Ejecutar(poliza1);
-agregarPoliza.Ejecutar(poliza2);
-agregarPoliza.Ejecutar(poliza3);
-agregarPoliza.Ejecutar(poliza4);
-agregarPoliza.Ejecutar(poliza5);
-agregarPoliza.Ejecutar(poliza6);
-agregarPoliza.Ejecutar(poliza7);
-
-
+Console.WriteLine($"Modificando poliza con Id {poliza5Modificado.Id}");
 modificarPoliza.Ejecutar(poliza5Modificado);
+
+Console.WriteLine($"Modificando poliza con Id {poliza6Modificado.Id}");
 modificarPoliza.Ejecutar(poliza6Modificado);
+
+Console.WriteLine($"Modificando poliza con Id {polizaNoEncontrada.Id}");
 modificarPoliza.Ejecutar(polizaNoEncontrada);
 
 
 int idPoliza = 3;
 int idPolizaNoEncontrado = 100;
 
+Console.WriteLine($"Eliminando Poliza con Id {idPoliza}");
 eliminarPoliza.Ejecutar(idPoliza);
+
+Console.WriteLine($"Eliminando Poliza con Id {idPolizaNoEncontrado}");
 eliminarPoliza.Ejecutar(idPolizaNoEncontrado);
+
+Console.WriteLine("Lista de polizas");
+listarPolizas.Ejecutar().ForEach(poliza => Console.WriteLine(poliza));
