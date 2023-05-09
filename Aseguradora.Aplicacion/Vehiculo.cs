@@ -10,6 +10,6 @@ public class Vehiculo
 	
 	public override string ToString() 
 	{
-		return $"Vehiculo con dominio: {Dominio}  y marca. {Marca}";
+		return $"Vehiculo con dominio: {Dominio}  y marca {Marca}";
 	}
 }

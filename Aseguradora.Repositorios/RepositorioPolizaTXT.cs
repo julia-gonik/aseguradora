@@ -28,6 +28,11 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 					sr.ReadLine(); // FechaFinVigencia
 					
 					ultimoId = polizaId;
+					
+					if (polizaId == poliza.Id) 
+					{
+						throw new Exception($"Poliza con Id {poliza.Id} ya existe");
+					}
 				}
 			}
 			
@@ -103,19 +108,22 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 	public List<Poliza> ListarPolizas()
 	{
 		var polizas = new List<Poliza>();
-		using var sr = new StreamReader(_nombreArch);
-		while (!sr.EndOfStream)
+		if (File.Exists(_nombreArch))
 		{
-			var poliza = new Poliza();
-			poliza.Id = int.Parse(sr.ReadLine() ?? "");
-			poliza.IdVehiculoAsegurado = int.Parse(sr.ReadLine() ?? "");
-			poliza.ValorAsegurado = double.Parse(sr.ReadLine() ?? "");
-			poliza.Franquicia = sr.ReadLine() ?? "";
-			poliza.TipoCobertura = (TipoCobertura)Enum.Parse(typeof(TipoCobertura), sr.ReadLine() ?? "");
-			poliza.FechaInicioVigencia = DateTime.Parse(sr.ReadLine() ?? "");
-			poliza.FechaFinVigencia = DateTime.Parse(sr.ReadLine() ?? "");
+			using var sr = new StreamReader(_nombreArch);
+			while (!sr.EndOfStream)
+			{
+				var poliza = new Poliza();
+				poliza.Id = int.Parse(sr.ReadLine() ?? "");
+				poliza.IdVehiculoAsegurado = int.Parse(sr.ReadLine() ?? "");
+				poliza.ValorAsegurado = double.Parse(sr.ReadLine() ?? "");
+				poliza.Franquicia = sr.ReadLine() ?? "";
+				poliza.TipoCobertura = (TipoCobertura)Enum.Parse(typeof(TipoCobertura), sr.ReadLine() ?? "");
+				poliza.FechaInicioVigencia = DateTime.Parse(sr.ReadLine() ?? "");
+				poliza.FechaFinVigencia = DateTime.Parse(sr.ReadLine() ?? "");
 
-			polizas.Add(poliza);
+				polizas.Add(poliza);
+			}
 		}
 		return polizas;
 	}
