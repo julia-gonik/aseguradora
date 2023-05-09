@@ -24,10 +24,6 @@ public class Titular : Persona
 				sb.AppendLine($"- {vehiculo.ToString()}");
 			}
 		}
-		else
-		{
-			sb.AppendLine("No tiene vehículos registrados.");
-		}
 		return sb.ToString();
 	}
 }

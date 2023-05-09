@@ -14,7 +14,8 @@ ListarVehiculosUseCase listarVehiculos = new ListarVehiculosUseCase(repoVehiculo
 ModificarVehiculoUseCase modificarVehiculo = new ModificarVehiculoUseCase(repoVehiculo);
 EliminarVehiculoUseCase eliminarVehiculo = new EliminarVehiculoUseCase(repoVehiculo);
 
-ListarTitularesConSusVehiculosUseCase ListarTitularesConSusVehiculos = new ListarTitularesConSusVehiculosUseCase(repoVehiculo, repoTitular);
+ListarTitularesConSusVehiculosUseCase ListarTitularesConSusVehiculos =
+	new ListarTitularesConSusVehiculosUseCase(repoVehiculo, repoTitular);
 
 IRepositorioPoliza repoPoliza = new RepositorioPolizaTXT();
 AgregarPolizaUseCase agregarPoliza = new AgregarPolizaUseCase(repoPoliza);
@@ -48,10 +49,27 @@ Titular titular3 = new Titular {
 	CorreoElectronico = "otroemail@gmail.com"
 };
 
+Titular titular4 = new Titular {
+	Nombre = "Ana García",
+	DNI = "90403849",
+	Direccion = "52 nro. 115",
+	Telefono = "221-423904",
+	CorreoElectronico = "otroemail@gmail.com"
+};
+
+	Console.WriteLine($"Agregando titular {titular.DNI}");
 	agregarTitular.Ejecutar(titular);
+	Console.WriteLine($"Agregando titular {titular2.DNI}");
 	agregarTitular.Ejecutar(titular2);
+	Console.WriteLine($"Agregando titular {titular3.DNI}");
 	agregarTitular.Ejecutar(titular3);
+
+	Console.WriteLine($"Agregando titular {titular4.DNI}");
+	agregarTitular.Ejecutar(titular4);
 	
+	Console.WriteLine("Lista de titulares");
+	listarTitulares.Ejecutar().ForEach(titular => Console.WriteLine(titular));
+
 	Titular titularModificado = new Titular {
 	Id = 2,
 	Nombre = "Alicia Raquel",
@@ -59,90 +77,105 @@ Titular titular3 = new Titular {
 	Direccion = "13 nro. 12",
 	Telefono = "221-904234",
 	CorreoElectronico = "otroemail@gmail.com"
-};
+	};
 
+	Titular titularModificadoNoExiste = new Titular {
+	Id = 2,
+	Nombre = "Maria Rodriguez",
+	DNI = "87654321",
+	Direccion = "55 nro. 204",
+	Telefono = "221-555567",
+	CorreoElectronico = "otroemail@gmail.com"
+	};
+
+	Console.WriteLine($"Modificando titular con DNI {titularModificado.Id}");
 	modificarTitular.Ejecutar(titularModificado);
-	
+	Console.WriteLine($"Modificando titular con DNI {titularModificadoNoExiste.Id}");
+	modificarTitular.Ejecutar(titularModificadoNoExiste);
+
+	Console.WriteLine("Eliminando Vehiculo con Id 3");
 	eliminarTitular.Ejecutar(3);
+	Console.WriteLine("Eliminando Vehiculo con Id 16");
+	eliminarTitular.Ejecutar(16);
 
 Vehiculo vehiculo1 = new Vehiculo 
 { 
-		Dominio = "ABC123", 
-		Marca = "Toyota", 
-		AnioFabricacion = 2010, 
-		IdTitular = 1
+	Dominio = "ABC123", 
+	Marca = "Toyota", 
+	AnioFabricacion = 2010, 
+	IdTitular = 1
 };
 
 Vehiculo vehiculo2 = new Vehiculo 
 { 
-		Dominio = "DEF456", 
-		Marca = "Ford", 
-		AnioFabricacion = 2015, 
-		IdTitular = 1
+	Dominio = "DEF456", 
+	Marca = "Ford", 
+	AnioFabricacion = 2015, 
+	IdTitular = 1
 };
 
 Vehiculo vehiculo3 = new Vehiculo 
 { 
-		Dominio = "GHI789", 
-		Marca = "Chevrolet", 
-		AnioFabricacion = 2020, 
-		IdTitular = 1
+	Dominio = "GHI789", 
+	Marca = "Chevrolet", 
+	AnioFabricacion = 2020, 
+	IdTitular = 1
 };
 
 Vehiculo vehiculo4 = new Vehiculo 
 { 
-		Dominio = "JKL012", 
-		Marca = "Honda", 
-		AnioFabricacion = 2012, 
-		IdTitular = 1
+	Dominio = "JKL012", 
+	Marca = "Honda", 
+	AnioFabricacion = 2012, 
+	IdTitular = 1
 };
 
 Vehiculo vehiculo5 = new Vehiculo 
 { 
-		Dominio = "MNO345", 
-		Marca = "BMW", 
-		AnioFabricacion = 2018, 
-		IdTitular = 1
+	Dominio = "MNO345", 
+	Marca = "BMW", 
+	AnioFabricacion = 2018, 
+	IdTitular = 1
 };
 
 Vehiculo vehiculo6 = new Vehiculo 
 { 
-		Dominio = "PQR678", 
-		Marca = "Mercedes", 
-		AnioFabricacion = 2019, 
-		IdTitular = 1
+	Dominio = "PQR678", 
+	Marca = "Mercedes", 
+	AnioFabricacion = 2019, 
+	IdTitular = 1
 };
 
 Vehiculo vehiculo7 = new Vehiculo 
 { 
-		Dominio = "STU901", 
-		Marca = "Audi", 
-		AnioFabricacion = 2016, 
-		IdTitular = 2
+	Dominio = "STU901", 
+	Marca = "Audi", 
+	AnioFabricacion = 2016, 
+	IdTitular = 2
 };
 
 Vehiculo vehiculo8 = new Vehiculo 
 { 
-		Dominio = "VWX234", 
-		Marca = "Jeep", 
-		AnioFabricacion = 2017, 
-		IdTitular = 2
+	Dominio = "VWX234", 
+	Marca = "Jeep", 
+	AnioFabricacion = 2017, 
+	IdTitular = 2
 };
 
 Vehiculo vehiculo9 = new Vehiculo 
 { 
-		Dominio = "YZA567", 
-		Marca = "Nissan", 
-		AnioFabricacion = 2014, 
-		IdTitular = 2
+	Dominio = "YZA567", 
+	Marca = "Nissan", 
+	AnioFabricacion = 2014, 
+	IdTitular = 2
 };
 
 Vehiculo vehiculo10 = new Vehiculo 
 { 
-		Dominio = "BCD890", 
-		Marca = "Kia", 
-		AnioFabricacion = 2013, 
-		IdTitular = 3 
+	Dominio = "BCD890", 
+	Marca = "Kia", 
+	AnioFabricacion = 2013, 
+	IdTitular = 3 
 };
 
 
@@ -189,8 +222,8 @@ modificarVehiculo.Ejecutar(vehiculoNoEncontrado);
 eliminarVehiculo.Ejecutar(5);
 eliminarVehiculo.Ejecutar(20);
 
-
-ListarTitularesConSusVehiculos.Ejecutar();
+Console.WriteLine("Lista de titulares con los autos");
+ListarTitularesConSusVehiculos.Ejecutar();ListarTitularesConSusVehiculos.Ejecutar().ForEach(titular => Console.WriteLine(titular));
 
 
 Poliza poliza1 = new Poliza
@@ -272,6 +305,10 @@ Poliza poliza8 = new Poliza
 	FechaInicioVigencia = new DateTime(2023, 5, 8),
 	FechaFinVigencia = new DateTime(2023, 12, 8)
 };
+
+
+
+
 
 Poliza poliza5Modificado = new Poliza 
 { 
