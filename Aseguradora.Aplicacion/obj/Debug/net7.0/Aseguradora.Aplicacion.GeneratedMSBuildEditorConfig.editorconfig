@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Aseguradora.Aplicacion
-build_property.ProjectDir = /home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/
+build_property.ProjectDir = /home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/

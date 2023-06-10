@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "J7gdLiqxZshNJl9KwUGDnheg96eNU/tXsdGRTg1UicBgwxTgXMJKFT3/el2wjnyYzPq9rP5h363cWqffWQprzw==",
+  "dgSpecHash": "65HIqZbCzC8I0P0Z/ynRs64uXj8MmyIk+CUYox7+aqL4gSHyjM2KCf8aXTx2HYpELmeIntAnC9nQjYdi6oypAA==",
   "success": true,
-  "projectFilePath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
+  "projectFilePath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

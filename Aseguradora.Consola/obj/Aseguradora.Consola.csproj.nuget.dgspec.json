@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj": {}
+    "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj": {}
   },
   "projects": {
-    "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {
+    "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
+        "projectUniqueName": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
         "projectName": "Aseguradora.Aplicacion",
-        "projectPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
+        "projectPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
         "packagesPath": "/home/julia/.nuget/packages/",
-        "outputPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/obj/",
+        "outputPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/julia/.nuget/NuGet/NuGet.Config"
@@ -57,14 +57,14 @@
         }
       }
     },
-    "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj": {
+    "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj",
+        "projectUniqueName": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj",
         "projectName": "Aseguradora.Consola",
-        "projectPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj",
+        "projectPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Consola/Aseguradora.Consola.csproj",
         "packagesPath": "/home/julia/.nuget/packages/",
-        "outputPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Consola/obj/",
+        "outputPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Consola/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/julia/.nuget/NuGet/NuGet.Config"
@@ -79,11 +79,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {
-                "projectPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj"
+              "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {
+                "projectPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj"
               },
-              "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj": {
-                "projectPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj"
+              "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj": {
+                "projectPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj"
               }
             }
           }
@@ -117,14 +117,14 @@
         }
       }
     },
-    "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj": {
+    "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj",
+        "projectUniqueName": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj",
         "projectName": "Aseguradora.Repositorios",
-        "projectPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj",
+        "projectPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj",
         "packagesPath": "/home/julia/.nuget/packages/",
-        "outputPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Repositorios/obj/",
+        "outputPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Repositorios/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/julia/.nuget/NuGet/NuGet.Config"
@@ -139,8 +139,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {
-                "projectPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj"
+              "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {
+                "projectPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj"
               }
             }
           }
@@ -154,6 +154,12 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

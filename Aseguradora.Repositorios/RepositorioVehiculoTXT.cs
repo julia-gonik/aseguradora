@@ -7,43 +7,21 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 
 	public void AgregarVehiculo(Vehiculo vehiculo)
 	{
-		try
+		using (var db = new AseguradoraContext())
 		{
-			int ultimoId = 0;
-
-			if (File.Exists(_nombreArch))
-			{
-				using var sr = new StreamReader(_nombreArch);
-				while (!sr.EndOfStream)
-				{
-					// Leer el Id del vehículo
-					int vehiculoId = int.Parse(sr.ReadLine() ?? "");
-					// Leer el dominio del vehículo y descartarlo
-					sr.ReadLine(); // dominio
-					sr.ReadLine(); // marca
-					sr.ReadLine(); // año de fabricación
-					sr.ReadLine(); // Id del titular
-					// Almacenar el Id del vehículo leído
-					ultimoId = vehiculoId;
-					
-					if (vehiculoId == vehiculo.Id) 
-					{
-						throw new Exception($"Vehiculo con Id {vehiculo.Id} ya existe");
-					}
-				}
-			}
-
-			vehiculo.Id = ultimoId + 1;
-			using var sw = new StreamWriter(_nombreArch, true);
-			sw.WriteLine(vehiculo.Id);
-			sw.WriteLine(vehiculo.Dominio);
-			sw.WriteLine(vehiculo.Marca);
-			sw.WriteLine(vehiculo.AnioFabricacion);
-			sw.WriteLine(vehiculo.IdTitular);
+			db.Database.EnsureCreated();
 		}
-		catch (Exception ex)
+		using (var db = new AseguradoraContext())
 		{
-			Console.WriteLine("Ocurrió un error: " + ex.Message);
+			try
+			{
+				Console.WriteLine(db.Vehiculos.Add(vehiculo));
+				db.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Ocurrió un error: " + ex.Message);
+			}
 		}
 	}
 
@@ -52,41 +30,22 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 	{
 		try
 		{
-			string archivoTemporal = "vehiculos_temp.txt";
-			using var sr = new StreamReader(_nombreArch);
-			using var sw = new StreamWriter(archivoTemporal);
-			bool found = false;
-
-			while (!sr.EndOfStream)
+			using (var db = new AseguradoraContext())
 			{
-				// Leer el Id y los datos del vehículo
-				int vehiculoId = int.Parse(sr.ReadLine() ?? "");
-				string dominio = sr.ReadLine() ?? "";
-				string marca = sr.ReadLine() ?? "";
-				int anioFabricacion = int.Parse(sr.ReadLine() ?? "");
-				int idTitular = int.Parse(sr.ReadLine() ?? "");
-
-				if (vehiculoId != id)
-				{
-					// Escribir el vehículo en el archivo temporal si su Id no coincide con el Id del vehículo que se va a eliminar
-					sw.WriteLine(vehiculoId);
-					sw.WriteLine(dominio);
-					sw.WriteLine(marca);
-					sw.WriteLine(anioFabricacion);
-					sw.WriteLine(idTitular);
-				} 
-				else
-				{
-					found = true;						
-				}
+				db.Database.EnsureCreated();
 			}
 			
-			File.Delete(_nombreArch);
-			File.Move(archivoTemporal, _nombreArch);
-			
-			if (!found) 
+			using (var db = new AseguradoraContext())
 			{
-				throw new Exception($"No se ha encontrado el vehiculo con id {id} a eliminar");
+				var vehiculo = db.Vehiculos.Find(id);
+				
+				if (vehiculo == null) 
+				{
+					throw new Exception($"No se ha encontrado el vehiculo con id {id} a eliminar");
+				}
+				
+				db.Remove(vehiculo);
+				db.SaveChanges();
 			}
 		}
 		catch (Exception ex)
@@ -109,7 +68,7 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 				vehiculo.Id = int.Parse(sr.ReadLine() ?? "");
 				vehiculo.Dominio = sr.ReadLine() ?? "";
 				vehiculo.Marca = sr.ReadLine() ?? "";
-				vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
+				// vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
 				vehiculo.IdTitular = int.Parse(sr.ReadLine() ?? "");
 
 				resultado.Add(vehiculo);
@@ -130,7 +89,7 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 				vehiculo.Id = int.Parse(sr.ReadLine() ?? "");
 				vehiculo.Dominio = sr.ReadLine() ?? "";
 				vehiculo.Marca = sr.ReadLine() ?? "";
-				vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
+				// vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
 				vehiculo.IdTitular = int.Parse(sr.ReadLine() ?? "");
 
 				if (vehiculo.IdTitular == idTitular)

@@ -7,45 +7,22 @@ public class RepositorioTitularTXT : IRepositorioTitular
 	// Titular: Id, DNI, apellido, nombre, dirección, teléfono y correo electrónico.
 	public void AgregarTitular(Titular titular)
 	{
-		try
+		using (var db = new AseguradoraContext())
 		{
-			int ultimoId = 0;
-
-			if (File.Exists(_nombreArch))
-			{
-				using var sr = new StreamReader(_nombreArch);
-				while (!sr.EndOfStream)
-				{
-					// Leer el Id del titular
-					int titularId = int.Parse(sr.ReadLine() ?? "");
-					// Leer el nombre del titular y descartarlo
-					sr.ReadLine(); // nombre
-					sr.ReadLine(); // telefono
-					string titularDNI = sr.ReadLine() ?? "";
-					sr.ReadLine(); // correo
-					sr.ReadLine(); // direccion
-								   // Almacenar el Id del titular leído
-					ultimoId = titularId;
-
-					if (titularDNI == titular.DNI)
-					{
-						throw new Exception($"Titular con DNI {titular.DNI} ya existe");
-					}
-				}
-			}
-
-			titular.Id = ultimoId + 1;
-			using var sw = new StreamWriter(_nombreArch, true);
-			sw.WriteLine(titular.Id);
-			sw.WriteLine(titular.Nombre);
-			sw.WriteLine(titular.Telefono);
-			sw.WriteLine(titular.DNI);
-			sw.WriteLine(titular.CorreoElectronico);
-			sw.WriteLine(titular.Direccion);
+			db.Database.EnsureCreated();
 		}
-		catch (Exception ex)
+		using (var db = new AseguradoraContext())
 		{
-			Console.WriteLine("Ocurrió un error: " + ex.Message);
+			try
+			{
+				db.Personas.Add(titular);				
+				// Console.WriteLine(db.Titulares.Add(titular));
+				Console.WriteLine(db.SaveChanges());
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Ocurrió un error: " + ex.Message);
+			}
 		}
 	}
 	public List<Titular> ListarTitulares()
@@ -184,7 +161,7 @@ public class RepositorioTitularTXT : IRepositorioTitular
 
 	public Titular ObtenerVehiculosDeTitular(Titular titular, Func<int, List<Vehiculo>> listaVehiculos)
 	{
-		titular.Vehiculos = listaVehiculos(titular.Id);
+		// titular.Vehiculos = listaVehiculos(titular.Id);
 		return titular;
 	}
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {}
+    "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {}
   },
   "projects": {
-    "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {
+    "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
+        "projectUniqueName": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
         "projectName": "Aseguradora.Aplicacion",
-        "projectPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
+        "projectPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj",
         "packagesPath": "/home/julia/.nuget/packages/",
-        "outputPath": "/home/julia/Documents/Julia/Facultad/NET/aseguradora/Aseguradora.Aplicacion/obj/",
+        "outputPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/julia/.nuget/NuGet/NuGet.Config"

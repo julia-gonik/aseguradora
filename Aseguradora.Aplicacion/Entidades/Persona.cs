@@ -2,7 +2,7 @@ namespace Aseguradora.Aplicacion;
 
 public abstract class Persona
 {
-    public int Id { get; set; }
+    public virtual int Id { get; set; }
     public string DNI { get; set;} = "00000000";
     public string Nombre { get; set; } = "";
     public string Telefono { get; set; } = "00000000";
