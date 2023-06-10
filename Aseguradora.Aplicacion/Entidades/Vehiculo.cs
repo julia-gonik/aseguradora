@@ -6,7 +6,7 @@ public class Vehiculo
 	public string Dominio { get; set; } = "";
 	public string Marca { get; set; } = "";
 	public string AnioFabricacion { get; set; } = "";
-	public int IdTitular { get; set; }
+	public int TitularId { get; set; }
 	
 	public override string ToString() 
 	{

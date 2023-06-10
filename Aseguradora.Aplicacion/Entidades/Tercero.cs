@@ -3,7 +3,7 @@ namespace Aseguradora.Aplicacion;
 public class Tercero : Persona
 {
     public string NombreAseguradora { get; set; } = "";
-    public int IdSiniestro { get; set; }
+    public int SiniestroId { get; set; }
 
     public override string ToString()
     {

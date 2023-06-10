@@ -69,7 +69,7 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 				vehiculo.Dominio = sr.ReadLine() ?? "";
 				vehiculo.Marca = sr.ReadLine() ?? "";
 				// vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
-				vehiculo.IdTitular = int.Parse(sr.ReadLine() ?? "");
+				vehiculo.TitularId = int.Parse(sr.ReadLine() ?? "");
 
 				resultado.Add(vehiculo);
 			}
@@ -77,7 +77,7 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 		return resultado;
 	}
 
-	public List<Vehiculo> ListarVehiculosPorTitular(int idTitular)
+	public List<Vehiculo> ListarVehiculosPorTitular(int TitularId)
 	{
 		var vehiculosTitular = new List<Vehiculo>();
 		if (File.Exists(_nombreArch))
@@ -90,9 +90,9 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 				vehiculo.Dominio = sr.ReadLine() ?? "";
 				vehiculo.Marca = sr.ReadLine() ?? "";
 				// vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
-				vehiculo.IdTitular = int.Parse(sr.ReadLine() ?? "");
+				vehiculo.TitularId = int.Parse(sr.ReadLine() ?? "");
 
-				if (vehiculo.IdTitular == idTitular)
+				if (vehiculo.TitularId == TitularId)
 				{
 					vehiculosTitular.Add(vehiculo);
 				}
@@ -121,7 +121,7 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 				string VehiculoDominio = sr.ReadLine() ?? "";
 				string VehiculoMarca = sr.ReadLine() ?? "";
 				int VehiculoAnioFabricacion = int.Parse(sr.ReadLine() ?? "");
-				int VehiculoIdTitular = int.Parse(sr.ReadLine() ?? "");
+				int VehiculoTitularId = int.Parse(sr.ReadLine() ?? "");
 
 				if (VehiculoId == vehiculo.Id)
 				{
@@ -130,7 +130,7 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 					sw.WriteLine(vehiculo.Dominio);
 					sw.WriteLine(vehiculo.Marca);
 					sw.WriteLine(vehiculo.AnioFabricacion);
-					sw.WriteLine(vehiculo.IdTitular);
+					sw.WriteLine(vehiculo.TitularId);
 					found = true;
 				}
 				else
@@ -140,7 +140,7 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 					sw.WriteLine(VehiculoDominio);
 					sw.WriteLine(VehiculoMarca);
 					sw.WriteLine(VehiculoAnioFabricacion);
-					sw.WriteLine(VehiculoIdTitular);
+					sw.WriteLine(VehiculoTitularId);
 				}
 			}
 			

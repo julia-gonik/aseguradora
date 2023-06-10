@@ -20,7 +20,7 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 				{
 					// Leer el Id del polzia
 					int polizaId = int.Parse(sr.ReadLine() ?? "");
-					sr.ReadLine(); // IdVehiculoAsegurado
+					sr.ReadLine(); // VehiculoId
 					sr.ReadLine(); // ValorAsegurado
 					sr.ReadLine(); // Franquicia
 					sr.ReadLine(); // TipoCobertura
@@ -40,7 +40,7 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 			
 			using var sw = new StreamWriter(_nombreArch, true);
 			sw.WriteLine(poliza.Id);
-			sw.WriteLine(poliza.IdVehiculoAsegurado);
+			sw.WriteLine(poliza.VehiculoId);
 			sw.WriteLine(poliza.ValorAsegurado);
 			sw.WriteLine(poliza.Franquicia);
 			sw.WriteLine(poliza.TipoCobertura);
@@ -68,7 +68,7 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 			while (!sr.EndOfStream)
 			{
 				int polizaId = int.Parse(sr.ReadLine() ?? "");
-				int idVehiculoAsegurado = int.Parse(sr.ReadLine() ?? "");
+				int VehiculoId = int.Parse(sr.ReadLine() ?? "");
 				double valorAsegurado = double.Parse(sr.ReadLine() ?? "");
 				string franquicia = sr.ReadLine() ?? "";
 				TipoCobertura tipoCobertura = (TipoCobertura)Enum.Parse(typeof(TipoCobertura), sr.ReadLine() ?? "");
@@ -78,7 +78,7 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 				if (polizaId != id)
 				{
 					sw.WriteLine(polizaId);
-					sw.WriteLine(idVehiculoAsegurado);
+					sw.WriteLine(VehiculoId);
 					sw.WriteLine(valorAsegurado);
 					sw.WriteLine(franquicia);
 					sw.WriteLine(tipoCobertura);
@@ -115,7 +115,7 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 			{
 				var poliza = new Poliza();
 				poliza.Id = int.Parse(sr.ReadLine() ?? "");
-				poliza.IdVehiculoAsegurado = int.Parse(sr.ReadLine() ?? "");
+				poliza.VehiculoId = int.Parse(sr.ReadLine() ?? "");
 				poliza.ValorAsegurado = double.Parse(sr.ReadLine() ?? "");
 				poliza.Franquicia = sr.ReadLine() ?? "";
 				poliza.TipoCobertura = (TipoCobertura)Enum.Parse(typeof(TipoCobertura), sr.ReadLine() ?? "");
@@ -140,7 +140,7 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 			while (!sr.EndOfStream)
 			{
 				int polizaId = int.Parse(sr.ReadLine() ?? "");
-				int idVehiculoAsegurado = int.Parse(sr.ReadLine() ?? "");
+				int VehiculoId = int.Parse(sr.ReadLine() ?? "");
 				double valorAsegurado = double.Parse(sr.ReadLine() ?? "");
 				string franquicia = sr.ReadLine() ?? "";
 				TipoCobertura tipoCobertura = (TipoCobertura)Enum.Parse(typeof(TipoCobertura), sr.ReadLine() ?? "");
@@ -150,7 +150,7 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 				if (polizaId == poliza.Id)
 				{
 					sw.WriteLine(poliza.Id);
-					sw.WriteLine(poliza.IdVehiculoAsegurado);
+					sw.WriteLine(poliza.VehiculoId);
 					sw.WriteLine(poliza.ValorAsegurado);
 					sw.WriteLine(poliza.Franquicia);
 					sw.WriteLine(poliza.TipoCobertura);
@@ -161,7 +161,7 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 				else
 				{
 					sw.WriteLine(polizaId);
-					sw.WriteLine(idVehiculoAsegurado);
+					sw.WriteLine(VehiculoId);
 					sw.WriteLine(valorAsegurado);
 					sw.WriteLine(franquicia);
 					sw.WriteLine(tipoCobertura);
