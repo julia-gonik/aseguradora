@@ -17,6 +17,6 @@ public class AseguradoraContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder
     optionsBuilder)
     {
-        optionsBuilder.UseSqlite("data source=Aseguradora.sqlite");
+        optionsBuilder.UseSqlite("data source=../Aseguradora.Repositorios/Aseguradora.sqlite");
     }
 }
