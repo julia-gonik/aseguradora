@@ -1,4 +1,6 @@
-﻿using Aseguradora.Aplicacion;
+﻿using Microsoft.EntityFrameworkCore;
+using Aseguradora.Aplicacion;
+
 namespace Aseguradora.Repositorios;
 
 public class RepositorioTitularTXT : IRepositorioTitular
@@ -15,9 +17,8 @@ public class RepositorioTitularTXT : IRepositorioTitular
 		{
 			try
 			{
-				db.Personas.Add(titular);				
-				// Console.WriteLine(db.Titulares.Add(titular));
-				Console.WriteLine(db.SaveChanges());
+				db.Titulares.Add(titular);				
+				db.SaveChanges();
 			}
 			catch (Exception ex)
 			{
@@ -27,24 +28,17 @@ public class RepositorioTitularTXT : IRepositorioTitular
 	}
 	public List<Titular> ListarTitulares()
 	{
-		var resultado = new List<Titular>();
-		if (File.Exists(_nombreArch))
+		
+		using (var db = new AseguradoraContext())
 		{
-			using var sr = new StreamReader(_nombreArch);
-			while (!sr.EndOfStream)
-			{
-				var titular = new Titular();
-				titular.Id = int.Parse(sr.ReadLine() ?? "");
-				titular.Nombre = sr.ReadLine() ?? "";
-				titular.Telefono = sr.ReadLine() ?? "";
-				titular.DNI = sr.ReadLine() ?? "";
-				titular.CorreoElectronico = sr.ReadLine() ?? "";
-				titular.Direccion = sr.ReadLine() ?? "";
-
-				resultado.Add(titular);
-			}
+			db.Database.EnsureCreated();
 		}
-		return resultado;
+		using (var db = new AseguradoraContext())
+		{
+			var titulares = db.Titulares.ToList();
+	
+			return titulares;
+		}
 	}
 
 
@@ -112,56 +106,27 @@ public class RepositorioTitularTXT : IRepositorioTitular
 
 	public void EliminarTitular(int id)
 	{
-		try
+		using (var db = new AseguradoraContext())
 		{
-			string archivoTemporal = "titulares_temp.txt";
-			using var sr = new StreamReader(_nombreArch);
-			using var sw = new StreamWriter(archivoTemporal); //hay uno para cosas temp pero ningans de usar
-			bool found = false;
-
-			while (!sr.EndOfStream)
-			{
-				// Leer el Id y el nombre del producto
-				int Id = int.Parse(sr.ReadLine() ?? "");
-				string Nombre = sr.ReadLine() ?? "";
-				string Telefono = sr.ReadLine() ?? "";
-				string DNI = sr.ReadLine() ?? "";
-				string CorreoElectronico = sr.ReadLine() ?? "";
-				string Direccion = sr.ReadLine() ?? "";
-
-				if (Id != id)
-				{
-					// Escribir el titular en el archivo temporal si su Id no coincide con el Id del titular que se va a eliminar
-					sw.WriteLine(Id);
-					sw.WriteLine(Nombre);
-					sw.WriteLine(Telefono);
-					sw.WriteLine(DNI);
-					sw.WriteLine(CorreoElectronico);
-					sw.WriteLine(Direccion);
-				}
-				else
-				{
-					found = true;
-				}
-			}
-
-			File.Delete(_nombreArch);
-			File.Move(archivoTemporal, _nombreArch);
-
-			if (!found)
+			db.Database.EnsureCreated();
+		}
+		using (var db = new AseguradoraContext())
+		{
+			var titular = db.Titulares.Find(id);
+			
+			if (titular == null) 
 			{
 				throw new Exception($"No se ha encontrado el titular con id {id} a eliminar");
 			}
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine("Ocurrió un error: " + ex.Message);
+			
+			db.Remove(titular);
+			db.SaveChanges();
 		}
 	}
 
 	public Titular ObtenerVehiculosDeTitular(Titular titular, Func<int, List<Vehiculo>> listaVehiculos)
 	{
-		// titular.Vehiculos = listaVehiculos(titular.Id);
+		titular.Vehiculos = listaVehiculos(titular.Id);
 		return titular;
 	}
 }

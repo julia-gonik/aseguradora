@@ -69,7 +69,7 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 				vehiculo.Dominio = sr.ReadLine() ?? "";
 				vehiculo.Marca = sr.ReadLine() ?? "";
 				// vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
-				vehiculo.TitularId = int.Parse(sr.ReadLine() ?? "");
+				// vehiculo.TitularId = int.Parse(sr.ReadLine() ?? "");
 
 				resultado.Add(vehiculo);
 			}
@@ -90,12 +90,12 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 				vehiculo.Dominio = sr.ReadLine() ?? "";
 				vehiculo.Marca = sr.ReadLine() ?? "";
 				// vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
-				vehiculo.TitularId = int.Parse(sr.ReadLine() ?? "");
+				// vehiculo.TitularId = int.Parse(sr.ReadLine() ?? "");
 
-				if (vehiculo.TitularId == TitularId)
-				{
-					vehiculosTitular.Add(vehiculo);
-				}
+				// if (vehiculo.TitularId == TitularId)
+				// {
+				// 	vehiculosTitular.Add(vehiculo);
+				// }
 			}
 		}
 		return vehiculosTitular;
@@ -130,7 +130,7 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 					sw.WriteLine(vehiculo.Dominio);
 					sw.WriteLine(vehiculo.Marca);
 					sw.WriteLine(vehiculo.AnioFabricacion);
-					sw.WriteLine(vehiculo.TitularId);
+					// sw.WriteLine(vehiculo.TitularId);
 					found = true;
 				}
 				else

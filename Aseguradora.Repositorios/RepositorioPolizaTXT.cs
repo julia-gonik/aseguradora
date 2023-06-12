@@ -8,49 +8,21 @@ public class RepositorioPolizaTXT : IRepositorioPoliza
 
 	public void AgregarPoliza(Poliza poliza)
 	{
-		try
+		using (var db = new AseguradoraContext())
 		{
-			int ultimoId = 0;
-
-			if (File.Exists(_nombreArch)) 
-			{
-				using var sr = new StreamReader(_nombreArch);
-				
-				while (!sr.EndOfStream)
-				{
-					// Leer el Id del polzia
-					int polizaId = int.Parse(sr.ReadLine() ?? "");
-					sr.ReadLine(); // VehiculoId
-					sr.ReadLine(); // ValorAsegurado
-					sr.ReadLine(); // Franquicia
-					sr.ReadLine(); // TipoCobertura
-					sr.ReadLine(); // FechaInicioVigencia
-					sr.ReadLine(); // FechaFinVigencia
-					
-					ultimoId = polizaId;
-					
-					if (polizaId == poliza.Id) 
-					{
-						throw new Exception($"Poliza con Id {poliza.Id} ya existe");
-					}
-				}
-			}
-			
-			poliza.Id = ultimoId + 1;
-			
-			using var sw = new StreamWriter(_nombreArch, true);
-			sw.WriteLine(poliza.Id);
-			sw.WriteLine(poliza.VehiculoId);
-			sw.WriteLine(poliza.ValorAsegurado);
-			sw.WriteLine(poliza.Franquicia);
-			sw.WriteLine(poliza.TipoCobertura);
-			sw.WriteLine(poliza.FechaInicioVigencia);
-			sw.WriteLine(poliza.FechaFinVigencia);
-
+			db.Database.EnsureCreated();
 		}
-		catch (Exception ex)
+		using (var db = new AseguradoraContext())
 		{
-			Console.WriteLine("Ocurrió un error al agregar la póliza: " + ex.Message);
+			try
+			{
+				Console.WriteLine(db.Polizas.Add(poliza));
+				db.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Ocurrió un error: " + ex);
+			}
 		}
 	}
 
