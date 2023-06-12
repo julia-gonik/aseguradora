@@ -33,21 +33,21 @@ Titular titular = new Titular {
 	CorreoElectronico = "otroMailNoTomado@gmail.com"
 };
 
-// Titular titular2 = new Titular {
-// 	Nombre = "Celeste",
-// 	DNI = "90403849",
-// 	Direccion = "13 nro. 12",
-// 	Telefono = "221-904234",
-// 	CorreoElectronico = "otroemail@gmail.com"
-// };
+Titular titular2 = new Titular {
+	Nombre = "Celeste",
+	DNI = "90403849",
+	Direccion = "13 nro. 12",
+	Telefono = "221-904234",
+	CorreoElectronico = "otroem534ail@gmail.com"
+};
 
-// Titular titular3 = new Titular {
-// 	Nombre = "Alicia Raquel",
-// 	DNI = "42342345",
-// 	Direccion = "13 nro. 12",
-// 	Telefono = "221-904234",
-// 	CorreoElectronico = "otroemail@gmail.com"
-// };
+Titular titular3 = new Titular {
+	Nombre = "Alicia Raquel",
+	DNI = "42342345",
+	Direccion = "13 nro. 12",
+	Telefono = "221-904234",
+	CorreoElectronico = "otroe3534mail@gmail.com"
+};
 
 // Titular titular4 = new Titular {
 // 	Nombre = "Ana García",
@@ -60,11 +60,11 @@ Titular titular = new Titular {
 Console.WriteLine($"Agregando titular {titular.DNI}");
 agregarTitular.Ejecutar(titular);
 
-// Console.WriteLine($"Agregando titular {titular2.DNI}");
-// agregarTitular.Ejecutar(titular2);
+Console.WriteLine($"Agregando titular {titular2.DNI}");
+agregarTitular.Ejecutar(titular2);
 
-// Console.WriteLine($"Agregando titular {titular3.DNI}");
-// agregarTitular.Ejecutar(titular3);
+Console.WriteLine($"Agregando titular {titular3.DNI}");
+agregarTitular.Ejecutar(titular3);
 
 // Console.WriteLine($"Agregando titular {titular4.DNI}");
 // agregarTitular.Ejecutar(titular4);
@@ -96,8 +96,8 @@ agregarTitular.Ejecutar(titular);
 // Console.WriteLine($"Modificando titular con DNI {titularModificadoNoExiste.Id}");
 // modificarTitular.Ejecutar(titularModificadoNoExiste);
 
-// Console.WriteLine("Eliminando Vehiculo con Id 3");
-// eliminarTitular.Ejecutar(3);
+// Console.WriteLine("Eliminando Vehiculo con Id 1");
+// eliminarTitular.Ejecutar(1);
 
 // Console.WriteLine("Eliminando Vehiculo con Id 16");
 // eliminarTitular.Ejecutar(16);
@@ -105,20 +105,22 @@ agregarTitular.Ejecutar(titular);
 // Console.WriteLine("Lista de titulares con los autos");
 // ListarTitularesConSusVehiculos.Ejecutar().ForEach(titular => Console.WriteLine(titular));
 
+
 Vehiculo vehiculo1 = new Vehiculo 
 { 
-	Dominio = "ABC123", 
+	Dominio = "PPP123", 
 	Marca = "Toyota", 
 	AnioFabricacion = "2010", 
-	TitularId = 1
+	TitularId = 2
 };
+
 
 Vehiculo vehiculo2 = new Vehiculo 
 { 
 	Dominio = "DEF456", 
 	Marca = "Ford", 
 	AnioFabricacion = "2015", 
-	TitularId = 1
+	TitularId = 2
 };
 
 Vehiculo vehiculo3 = new Vehiculo 
@@ -126,147 +128,158 @@ Vehiculo vehiculo3 = new Vehiculo
 	Dominio = "GHI789", 
 	Marca = "Chevrolet", 
 	AnioFabricacion = "2020", 
-	TitularId = 1
-};
-
-Vehiculo vehiculo4 = new Vehiculo 
-{ 
-	Dominio = "JKL012", 
-	Marca = "Honda", 
-	AnioFabricacion = "2012", 
-	TitularId = 1
-};
-
-Vehiculo vehiculo5 = new Vehiculo 
-{ 
-	Dominio = "MNO345", 
-	Marca = "BMW", 
-	AnioFabricacion = "2018", 
-	TitularId = 1
-};
-
-Vehiculo vehiculo6 = new Vehiculo 
-{ 
-	Dominio = "PQR678", 
-	Marca = "Mercedes", 
-	AnioFabricacion = "2019", 
-	TitularId = 1
-};
-
-Vehiculo vehiculo7 = new Vehiculo 
-{ 
-	Dominio = "STU901", 
-	Marca = "Audi", 
-	AnioFabricacion = "2016", 
 	TitularId = 2
 };
 
-Vehiculo vehiculo8 = new Vehiculo 
-{ 
-	Dominio = "VWX234", 
-	Marca = "Jeep", 
-	AnioFabricacion = "2017", 
-	TitularId = 2
-};
+// Vehiculo vehiculo4 = new Vehiculo 
+// { 
+// 	Dominio = "JKL012", 
+// 	Marca = "Honda", 
+// 	AnioFabricacion = "2012", 
+// 	TitularId = 1
+// };
 
-Vehiculo vehiculo9 = new Vehiculo 
-{ 
-	Dominio = "YZA567", 
-	Marca = "Nissan", 
-	AnioFabricacion = "2014", 
-	TitularId = 2
-};
+// Vehiculo vehiculo5 = new Vehiculo 
+// { 
+// 	Dominio = "MNO345", 
+// 	Marca = "BMW", 
+// 	AnioFabricacion = "2018", 
+// 	TitularId = 1
+// };
 
-Vehiculo vehiculo10 = new Vehiculo 
-{ 
-	Dominio = "BCD890", 
-	Marca = "Kia", 
-	AnioFabricacion = "2013", 
-	TitularId = 3 
-};
+// Vehiculo vehiculo6 = new Vehiculo 
+// { 
+// 	Dominio = "PQR678", 
+// 	Marca = "Mercedes", 
+// 	AnioFabricacion = "2019", 
+// 	TitularId = 1
+// };
+
+// Vehiculo vehiculo7 = new Vehiculo 
+// { 
+// 	Dominio = "STU901", 
+// 	Marca = "Audi", 
+// 	AnioFabricacion = "2016", 
+// 	TitularId = 2
+// };
+
+// Vehiculo vehiculo8 = new Vehiculo 
+// { 
+// 	Dominio = "VWX234", 
+// 	Marca = "Jeep", 
+// 	AnioFabricacion = "2017", 
+// 	TitularId = 2
+// };
+
+// Vehiculo vehiculo9 = new Vehiculo 
+// { 
+// 	Dominio = "YZA567", 
+// 	Marca = "Nissan", 
+// 	AnioFabricacion = "2014", 
+// 	TitularId = 2
+// };
+
+// Vehiculo vehiculo10 = new Vehiculo 
+// { 
+// 	Dominio = "BCD890", 
+// 	Marca = "Kia", 
+// 	AnioFabricacion = "2013", 
+// 	TitularId = 3 
+// };
 
 
 agregarVehiculo.Ejecutar(vehiculo1);
 Console.WriteLine($"Agregando Vehiculo {vehiculo1}");
 
+
 agregarVehiculo.Ejecutar(vehiculo2);
 Console.WriteLine($"Agregando Vehiculo {vehiculo2}");
+
+agregarTitular.Ejecutar(titular);
+
+// agregarVehiculo.Ejecutar(vehiculo2);
+// Console.WriteLine($"Agregando Vehiculo {vehiculo2}");
 
 agregarVehiculo.Ejecutar(vehiculo3);
 Console.WriteLine($"Agregando Vehiculo {vehiculo3}");
 
-agregarVehiculo.Ejecutar(vehiculo4);
-Console.WriteLine($"Agregando Vehiculo {vehiculo4}");
 
-agregarVehiculo.Ejecutar(vehiculo5);
-Console.WriteLine($"Agregando Vehiculo {vehiculo5}");
-
-agregarVehiculo.Ejecutar(vehiculo6);
-Console.WriteLine($"Agregando Vehiculo {vehiculo6}");
-
-agregarVehiculo.Ejecutar(vehiculo7);
-Console.WriteLine($"Agregando Vehiculo {vehiculo7}");
+Console.WriteLine("Lista de titulares");
+listarTitulares.Ejecutar().ForEach(titular => Console.WriteLine(titular));
 
 
-// agregarVehiculo.Ejecutar(new Vehiculo 
-// { 
-// 		Id = 5,
-// 		Dominio = "Agregando", 
-// 		Marca = "Ya existente", 
-// 		AnioFabricacion = "2017", 
-// 		TitularId = 1 
-// });
+// agregarVehiculo.Ejecutar(vehiculo4);
+// Console.WriteLine($"Agregando Vehiculo {vehiculo4}");
+
+// agregarVehiculo.Ejecutar(vehiculo5);
+// Console.WriteLine($"Agregando Vehiculo {vehiculo5}");
+
+// agregarVehiculo.Ejecutar(vehiculo6);
+// Console.WriteLine($"Agregando Vehiculo {vehiculo6}");
+
+// agregarVehiculo.Ejecutar(vehiculo7);
+// Console.WriteLine($"Agregando Vehiculo {vehiculo7}");
 
 
-// Vehiculo vehiculo5Modificado = new Vehiculo 
-// { 
-// 		Id = 5,
-// 		Dominio = "nuevoMNO345", 
-// 		Marca = "otraBMW", 
-// 		AnioFabricacion = "2017", 
-// 		TitularId = 1 
-// };
-
-// Vehiculo vehiculo6Modificado = new Vehiculo 
-// { 
-// 		Id = 6,
-// 		Dominio = "otroPQR678", 
-// 		Marca = "otroMercedes", 
-// 		AnioFabricacion = "2019", 
-// 		TitularId = 2 
-// };
-
-// Vehiculo vehiculoNoEncontrado = new Vehiculo 
-// { 
-// 		Id = 12,
-// 		Dominio = "No", 
-// 		Marca = "Encontrado", 
-// 		AnioFabricacion = "2019", 
-// 		TitularId = 2 
-// };
+// // agregarVehiculo.Ejecutar(new Vehiculo 
+// // { 
+// // 		Id = 5,
+// // 		Dominio = "Agregando", 
+// // 		Marca = "Ya existente", 
+// // 		AnioFabricacion = "2017", 
+// // 		TitularId = 1 
+// // });
 
 
-// Console.WriteLine($"Modificando vehiculo con Id {vehiculo5Modificado.Id}");
-// modificarVehiculo.Ejecutar(vehiculo5Modificado);
+// // Vehiculo vehiculo5Modificado = new Vehiculo 
+// // { 
+// // 		Id = 5,
+// // 		Dominio = "nuevoMNO345", 
+// // 		Marca = "otraBMW", 
+// // 		AnioFabricacion = "2017", 
+// // 		TitularId = 1 
+// // };
 
-// Console.WriteLine($"Modificando vehiculo con Id {vehiculo6Modificado.Id}");
-// modificarVehiculo.Ejecutar(vehiculo6Modificado);
+// // Vehiculo vehiculo6Modificado = new Vehiculo 
+// // { 
+// // 		Id = 6,
+// // 		Dominio = "otroPQR678", 
+// // 		Marca = "otroMercedes", 
+// // 		AnioFabricacion = "2019", 
+// // 		TitularId = 2 
+// // };
 
-// Console.WriteLine($"Modificando vehiculo con Id {vehiculoNoEncontrado.Id}");
-// modificarVehiculo.Ejecutar(vehiculoNoEncontrado);
+// // Vehiculo vehiculoNoEncontrado = new Vehiculo 
+// // { 
+// // 		Id = 12,
+// // 		Dominio = "No", 
+// // 		Marca = "Encontrado", 
+// // 		AnioFabricacion = "2019", 
+// // 		TitularId = 2 
+// // };
 
 
-// Console.WriteLine("Eliminando Vehiculo con Id 5");
-// eliminarVehiculo.Ejecutar(5);
-// Console.WriteLine("Eliminando Vehiculo con Id 20");
-// eliminarVehiculo.Ejecutar(20);
+// // Console.WriteLine($"Modificando vehiculo con Id {vehiculo5Modificado.Id}");
+// // modificarVehiculo.Ejecutar(vehiculo5Modificado);
+
+// // Console.WriteLine($"Modificando vehiculo con Id {vehiculo6Modificado.Id}");
+// // modificarVehiculo.Ejecutar(vehiculo6Modificado);
+
+// // Console.WriteLine($"Modificando vehiculo con Id {vehiculoNoEncontrado.Id}");
+// // modificarVehiculo.Ejecutar(vehiculoNoEncontrado);
 
 
-// Console.WriteLine("Lista de vehiculos");
-// listarVehiculos.Ejecutar().ForEach(vehiculo => Console.WriteLine(vehiculo));
+// // Console.WriteLine("Eliminando Vehiculo con Id 5");
+// // eliminarVehiculo.Ejecutar(5);
+// // Console.WriteLine("Eliminando Vehiculo con Id 20");
+// // eliminarVehiculo.Ejecutar(20);
 
-// Console.WriteLine("Lista de titulares con sus vehiculos");
-// ListarTitularesConSusVehiculos.Ejecutar().ForEach(titular => Console.WriteLine(titular));;
+
+// // Console.WriteLine("Lista de vehiculos");
+// // listarVehiculos.Ejecutar().ForEach(vehiculo => Console.WriteLine(vehiculo));
+
+// // Console.WriteLine("Lista de titulares con sus vehiculos");
+// // ListarTitularesConSusVehiculos.Ejecutar().ForEach(titular => Console.WriteLine(titular));;
 
 
 // Poliza poliza1 = new Poliza
@@ -339,8 +352,19 @@ Console.WriteLine($"Agregando Vehiculo {vehiculo7}");
 // 	FechaFinVigencia = new DateTime(2023, 12, 8)
 // };
 
-// agregarPoliza.Ejecutar(poliza1);
-// Console.WriteLine($"Agregando Poliza {poliza1}");
+
+// Poliza poliza8 = new Poliza
+// {
+// 	VehiculoId = 111,
+// 	ValorAsegurado = 9000,
+// 	Franquicia = "1800",
+// 	TipoCobertura = TipoCobertura.ResponsabilidadCivil,
+// 	FechaInicioVigencia = new DateTime(2023, 5, 8),
+// 	FechaFinVigencia = new DateTime(2023, 12, 8)
+// };
+
+// agregarPoliza.Ejecutar(poliza8);
+// Console.WriteLine($"Agregando Poliza {poliza8}");
 
 // agregarPoliza.Ejecutar(poliza2);
 // Console.WriteLine($"Agregando Poliza {poliza2}");
