@@ -4,6 +4,7 @@ public class Siniestro
 {
     public int Id { get; set; }
     public int PolizaId { get; set; }
+    public Poliza? Poliza { get; set; }
     public DateTime FechaIngreso { get; set; }
     public DateTime FechaOcurrencia { get; set; }
     public string Direccion { get; set; } = "";

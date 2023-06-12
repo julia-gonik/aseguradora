@@ -4,6 +4,7 @@ public class Poliza
 {
 	public int Id { get; set; }
 	public int VehiculoId { get; set; }
+	public Vehiculo? Vehiculo { get; set; }
 	public double ValorAsegurado { get; set; }
 	public string Franquicia { get; set; } = "";
 	public TipoCobertura TipoCobertura { get; set; }

@@ -6,7 +6,7 @@ public class Titular : Persona
 {
 	public string Direccion { get; set; } = "";
 	public string CorreoElectronico { get; set; } = "";
-	public List<Vehiculo>? Vehiculos { get; set; }
+	public virtual List<Vehiculo> Vehiculos { get; set; } = new List<Vehiculo>();
 	
 	public override string ToString()
 	{
