@@ -1,0 +1,43 @@
+@page "/titular/{Id:int}/vehiculos"
+@inject NavigationManager Navegador;
+@inject ListarTitularesConSusVehiculosUseCase ListarTitularesConSusVehiculosUseCase;
+
+<PageTitle>Vehiculos de titular</PageTitle>
+
+<h1 style="margin-bottom: 20px;">Vehiculos de @_titular.Nombre</h1>
+
+<table>
+  <thead>
+    <tr>
+        <th>ID</th>
+        <th>Dominio</th>
+        <th>Marca</th>
+        <th>Año de Fabricación</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    @foreach (var vehiculo in _vehiculosDeTitular)
+    {
+      <tr>
+        <td>@vehiculo.Id</td>
+        <td>@vehiculo.Dominio</td>
+        <td>@vehiculo.Marca</td>
+        <td>@vehiculo.AnioFabricacion</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+@code {
+
+ [Parameter] public int Id { get; set; }
+   List<Vehiculo> _vehiculosDeTitular = new List<Vehiculo>();
+    Titular _titular = new Titular();
+  protected override void OnParametersSet()
+  {
+    _titular = ListarTitularesConSusVehiculosUseCase.Ejecutar().First(t => t.Id == Id);
+    _vehiculosDeTitular = _titular.Vehiculos;
+  }
+}

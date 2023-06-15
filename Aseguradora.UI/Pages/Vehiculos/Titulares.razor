@@ -1,0 +1,64 @@
+﻿@page "/vehiculos"
+@inject NavigationManager Navegador;
+@inject ListarTitularesUseCase ListarTitularesUseCase;
+
+<PageTitle>Titulares</PageTitle>
+
+<h1 style="margin-bottom: 20px;">Titulares</h1>
+
+<button type="button" class="btn btn-primary btn-block mb-4" @onclick="CrearTitular">
+   <span class="oi oi-plus"></span>
+   Crear Titular
+  </button>
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>DNI</th>
+      <th>Dirección</th>
+      <th>Teléfono</th>
+      <th>Correo Electrónico</th>
+      <th>Vehículos</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    @foreach (var titular in titulares)
+    {
+      <tr>
+        <td>@titular.Id</td>
+        <td>@titular.Nombre</td>
+        <td>@titular.DNI</td>
+        <td>@titular.Direccion</td>
+        <td>@titular.Telefono</td>
+        <td>@titular.CorreoElectronico</td>
+        <td>
+          <button>Listar Vehiculos</button>
+        </td>
+        <td>
+          <div class="action-icons">
+            <span class="oi oi-trash"></span>
+            <span class="oi oi-pencil"></span>
+          </div>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+@code {
+
+  List<Titular> titulares = new List<Titular>();
+  protected override void OnInitialized()
+  {
+    titulares = ListarTitularesUseCase.Ejecutar();
+  }
+
+  void CrearTitular()
+  {
+    Navegador.NavigateTo("titular");
+  }
+}
