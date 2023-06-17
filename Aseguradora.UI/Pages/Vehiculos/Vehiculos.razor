@@ -1,12 +1,13 @@
 ﻿@page "/vehiculos"
 @inject NavigationManager Navegador;
 @inject ListarVehiculosUseCase ListarVehiculosUseCase;
+@inject EliminarVehiculoUseCase EliminarVehiculoUseCase;
 
 <PageTitle>Vehiculos</PageTitle>
 
 <h1 style="margin-bottom: 20px;">Vehiculos</h1>
 
-<button type="button" class="btn btn-primary btn-block mb-4" @onclick="CrearTitular">
+<button type="button" class="btn btn-primary btn-block mb-4" @onclick="CrearVehiculo">
    <span class="oi oi-plus"></span>
    Crear Vehiculo
   </button>
@@ -30,15 +31,20 @@
         <td>@vehiculo.Dominio</td>
         <td>@vehiculo.Marca</td>
         <td>@vehiculo.AnioFabricacion</td>
-        <td>@vehiculo.Titular</td>
-        <td>
-          <button>Listar Vehiculos</button>
-        </td>
+        <td>@vehiculo.Titular?.Nombre</td>
         <td>
           <div class="action-icons">
-            <span class="oi oi-trash"></span>
-            <span class="oi oi-pencil"></span>
+            <button class="btn btn-primary" @onclick="()=>ModificarVehiculo(vehiculo)" >
+              <span class="oi oi-pencil" ></span>
+            </button>
+            <button class="btn btn-danger" @onclick="() => MostarDialogoDeEliminar(vehiculo)">
+              <span class="oi oi-trash" ></span>
+            </button>
           </div>
+          <DialogoConfirmacion 
+            @ref=dialogo 
+            Mensaje="¿Estas seguro que deseas borrar el vehiculo?"
+            OnConfirmado=EliminarVehiculo />
         </td>
       </tr>
     }
@@ -47,15 +53,40 @@
 
 
 @code {
-
+  DialogoConfirmacion dialogo = null!;
   List<Vehiculo> vehiculos = new List<Vehiculo>();
+  Vehiculo? _vehiculoAEliminar = null;
+  
+  private void EliminarVehiculo() {
+    if (_vehiculoAEliminar != null) {
+      EliminarVehiculoUseCase.Ejecutar(_vehiculoAEliminar.Id);
+      vehiculos = ListarVehiculosUseCase.Ejecutar();
+    }
+  }
+
   protected override void OnInitialized()
   {
     vehiculos = ListarVehiculosUseCase.Ejecutar();
   }
 
-  void CrearTitular()
+  void CrearVehiculo()
   {
     Navegador.NavigateTo("vehiculo");
+  }
+
+  void ModificarVehiculo(Vehiculo vehiculo)
+  {
+    Navegador.NavigateTo($"vehiculo/{vehiculo.Id}");
+  }
+
+  void IrAVehiculos(Vehiculo vehiculo)
+  {
+    Navegador.NavigateTo($"vehiculo/{vehiculo.Id}/vehiculos");
+  }
+  
+  void MostarDialogoDeEliminar(Vehiculo v) {
+    _vehiculoAEliminar = v;
+    
+    dialogo.Mostrar();
   }
 }

@@ -48,11 +48,11 @@
             <button class="btn btn-danger" @onclick="() => MostarDialogoDeEliminar(titular)">
               <span class="oi oi-trash" ></span>
             </button>
+          </div>  
             <DialogoConfirmacion 
               @ref=dialogo 
               Mensaje="¿Estas seguro que deseas borrar el titular?"
               OnConfirmado=EliminarTitular />
-          </div>  
         </td>
       </tr>
     }

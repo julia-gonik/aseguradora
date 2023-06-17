@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Aseguradora.Aplicacion;
 namespace Aseguradora.Repositorios;
 
@@ -57,25 +58,19 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
 
     public List<Vehiculo> ListarVehiculos()
     {
-        var resultado = new List<Vehiculo>();
-        if (File.Exists(_nombreArch))
+
+        using (var db = new AseguradoraContext())
         {
-            using var sr = new StreamReader(_nombreArch);
-
-            while (!sr.EndOfStream)
-            {
-                var vehiculo = new Vehiculo();
-                vehiculo.Id = int.Parse(sr.ReadLine() ?? "");
-                vehiculo.Dominio = sr.ReadLine() ?? "";
-                vehiculo.Marca = sr.ReadLine() ?? "";
-                // vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
-                // vehiculo.TitularId = int.Parse(sr.ReadLine() ?? "");
-
-                resultado.Add(vehiculo);
-            }
+            db.Database.EnsureCreated();
         }
-        return resultado;
+        using (var db = new AseguradoraContext())
+        {
+            var vehiculos = db.Vehiculos.Include(t => t.Titular).ToList();
+
+            return vehiculos;
+        }
     }
+
 
     public List<Vehiculo> ListarVehiculosPorTitular(int TitularId)
     {
