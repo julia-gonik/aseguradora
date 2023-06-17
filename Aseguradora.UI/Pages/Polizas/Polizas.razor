@@ -1,0 +1,94 @@
+﻿@page "/polizas"
+@inject NavigationManager Navegador;
+@inject ListarPolizasUseCase ListarPolizasUseCase;
+@inject EliminarPolizaUseCase EliminarPolizaUseCase;
+
+<PageTitle>Polizas</PageTitle>
+
+<h1 style="margin-bottom: 20px;">Polizas</h1>
+
+<button type="button" class="btn btn-primary btn-block mb-4" @onclick="CrearPoliza">
+   <span class="oi oi-plus"></span>
+   Crear Poliza
+  </button>
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Dominio</th>
+      <th>Marca</th>
+      <th>Año de Fabricación</th>
+      <th>Titular</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    @foreach (var poliza in polizas)
+    {
+      <tr>
+        <td>@poliza.Id</td>
+        <td>@poliza.Vehiculo?.Dominio</td>
+        <td>@poliza.ValorAsegurado</td>
+        <td>@poliza.Franquicia</td>
+        <td>@poliza.TipoCobertura</td>
+        <td>@poliza.FechaInicioVigencia</td>
+        <td>@poliza.FechaFinVigencia</td>
+        <td>
+          <div class="action-icons">
+            <button class="btn btn-primary" @onclick="()=>ModificarPoliza(poliza)" >
+              <span class="oi oi-pencil" ></span>
+            </button>
+            <button class="btn btn-danger" @onclick="() => MostarDialogoDeEliminar(poliza)">
+              <span class="oi oi-trash" ></span>
+            </button>
+          </div>
+          <DialogoConfirmacion 
+            @ref=dialogo 
+            Mensaje="¿Estas seguro que deseas borrar la poliza?"
+            OnConfirmado=EliminarPoliza />
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+@code {
+  DialogoConfirmacion dialogo = null!;
+  List<Poliza> polizas = new List<Poliza>();
+  Poliza? _polizaAEliminar = null;
+  
+  private void EliminarPoliza() {
+    if (_polizaAEliminar != null) {
+      EliminarPolizaUseCase.Ejecutar(_polizaAEliminar.Id);
+      polizas = ListarPolizasUseCase.Ejecutar();
+    }
+  }
+
+  protected override void OnInitialized()
+  {
+    polizas = ListarPolizasUseCase.Ejecutar();
+  }
+
+  void CrearPoliza()
+  {
+    Navegador.NavigateTo("poliza");
+  }
+
+  void ModificarPoliza(Poliza poliza)
+  {
+    Navegador.NavigateTo($"poliza/{poliza.Id}");
+  }
+
+  void IrAPolizas(Poliza poliza)
+  {
+    Navegador.NavigateTo($"poliza/{poliza.Id}/polizas");
+  }
+  
+  void MostarDialogoDeEliminar(Poliza p) {
+    _polizaAEliminar = p;
+    
+    dialogo.Mostrar();
+  }
+}

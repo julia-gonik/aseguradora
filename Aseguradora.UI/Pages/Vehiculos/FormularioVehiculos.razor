@@ -8,14 +8,14 @@
 
 <PageTitle>Vehiculos</PageTitle>
 
- @if (_esNuevoVehiculo)
-  {
-    <h3>Agregando un nuevo Vehiculo</h3>
-  }
-  else
-  {
-    <h3>Modificando al Vehiculo con patente "@_vehiculo.Dominio"</h3>
-  }
+@if (_esNuevoVehiculo)
+{
+      <h3>Agregando un nuevo Vehiculo</h3>
+}
+else
+{
+      <h3>Modificando al Vehiculo con patente "@_vehiculo.Dominio"</h3>
+}
  <form>
     <div class="form-group">
       <label for="dominio">Dominio</label>
@@ -30,7 +30,7 @@
       <input type="number" id="anioFabricacion" name="anioFabricacion" @bind="_vehiculo.AnioFabricacion" required>
     </div>
 
-    @* <div class="form-group">
+  @* <div class="form-group">
       <label for="titularid">Titular</label>
       <input type="number" id="titularid" name="titularid" @bind="_vehiculo.TitularId" required>
     </div> *@
@@ -39,14 +39,14 @@
         <label for="TitularId">Select Titular:</label>
         <select class="form-control" id="TitularId" name="TitularId" @bind="_vehiculo.TitularId" required>
             <option value="">Select a Titular</option>
-            @foreach (var titular in TitularList)
-            {
-                <option value="@titular.Id">@titular.Nombre</option>
-            }
+      @foreach (var titular in TitularList)
+      {
+                  <option value="@titular.Id">@titular.Nombre</option>
+      }
         </select>
     </div>
-   
-    <button class="btn btn-primary btn-block mb-4" @onclick="Guardar">Guardar vehiculo</button>
+
+    <button type="submit" class="btn btn-primary btn-block mb-4" @onclick="Guardar">Guardar vehiculo</button>
   </form>
 
 

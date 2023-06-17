@@ -1,0 +1,88 @@
+@page "/poliza/{Id:int?}"
+@inject NavigationManager Navegador;
+@inject AgregarPolizaUseCase AgregarPolizaUseCase;
+@inject ModificarPolizaUseCase ModificarPolizaUseCase;
+@inject ObtenerPolizaUseCase ObtenerPolizaUseCase;
+@inject ObtenerVehiculoUseCase ObtenerVehiculoUseCase;
+@inject ListarVehiculoesUseCase ListarVehiculoesUseCase;
+
+<PageTitle>Polizas</PageTitle>
+
+ @if (_esNuevaPoliza)
+  {
+    <h3>Agregando una nueva poliza</h3>
+  }
+  else
+  {
+    <h3>Modificando a la Poliza del vehiculo "@_poliza.Vehiculo"</h3>
+  }
+ <form>
+    <div class="form-group">
+      <label for="dominio">Dominio</label>
+      <input type="text" id="dominio" @bind="_poliza.Dominio" name="dominio" required>
+    </div>
+    <div class="form-group">
+      <label for="marca">Marca</label>
+      <input type="text" id="marca" name="marca" @bind="_poliza.Marca" required>
+    </div>
+    <div class="form-group">
+      <label for="anioFabricacion">Año de Fabricación</label>
+      <input type="number" id="anioFabricacion" name="anioFabricacion" @bind="_poliza.AnioFabricacion" required>
+    </div>
+
+    @* <div class="form-group">
+      <label for="titularid">Titular</label>
+      <input type="number" id="titularid" name="titularid" @bind="_poliza.TitularId" required>
+    </div> *@
+
+    <div class="form-group">
+        <label for="TitularId">Select Titular:</label>
+        <select class="form-control" id="TitularId" name="TitularId" @bind="_poliza.TitularId" required>
+            <option value="">Select a Titular</option>
+            @foreach (var titular in TitularList)
+            {
+                <option value="@titular.Id">@titular.Nombre</option>
+            }
+        </select>
+    </div>
+   
+    <button class="btn btn-primary btn-block mb-4" @onclick="Guardar">Guardar Poliza</button>
+  </form>
+
+
+@code {
+  [Parameter] public int? Id { get; set; }
+  bool _esNuevaPoliza = true;
+  protected override void OnParametersSet()
+  {
+    if (Id != null)
+    {
+      var polizaHallada = ObtenerPolizaUseCase.Ejecutar(Id.Value);
+      if (polizaHallada != null)
+      {
+        _poliza = polizaHallada;
+        _esNuevaPoliza=false;
+      }
+    }
+  }
+  List<Titular> TitularList = new List<Titular>();
+  protected override void OnInitialized()
+  {
+    TitularList = ListarTitularesUseCase.Ejecutar();
+  }
+  Poliza _poliza = new Poliza();
+  void Guardar()
+  {
+    if (_esNuevaPoliza)
+    {
+      AgregarPolizaUseCase.Ejecutar(_poliza);
+    } 
+    else 
+    {
+      ModificarPolizaUseCase.Ejecutar(_poliza);
+    }
+
+    _poliza = new Poliza();
+    Navegador.NavigateTo("polizas");
+  }
+}
