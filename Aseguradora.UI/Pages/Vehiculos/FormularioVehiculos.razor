@@ -1,0 +1,96 @@
+@page "/vehiculo/{Id:int?}"
+@inject NavigationManager Navegador;
+@inject AgregarVehiculoUseCase AgregarVehiculoUseCase;
+@inject ModificarVehiculoUseCase ModificarVehiculoUseCase;
+@inject ObtenerVehiculoUseCase ObtenerVehiculoUseCase;
+@inject ListarTitularesUseCase ListarTitularesUseCase;
+
+<PageTitle>Vehiculos</PageTitle>
+
+ <h1>Crear Vehiculo</h1>
+ <form>
+    <div class="form-group">
+      <label for="dominio">Dominio</label>
+      <input type="text" id="dominio" @bind="vehiculo.Dominio" name="dominio" required>
+    </div>
+    <div class="form-group">
+      <label for="marca">Marca</label>
+      <input type="text" id="marca" name="marca" @bind="vehiculo.Marca" required>
+    </div>
+    <div class="form-group">
+      <label for="anioFabricacion">Año de Fabricación</label>
+      <input type="text" id="anioFabricacion" name="anioFabricacion" @bind="vehiculo.AnioFabricacion" required>
+    </div>
+    <div class="form-group">
+      <label for="titular">Titular</label>
+      <input type="number" id="titular" name="titular" @bind="vehiculo.Titular" required>
+    </div>
+    <div class="form-group">
+      <select class="form-control" @bind="@SelectedTitularID">
+
+        <option value=""></option>
+        @foreach(var titular in TitularList)
+        {
+            <option value = "@titular.Id"> @titular.Nombre </option >
+        }
+      </select>
+    </div>
+   
+    <button class="btn btn-primary btn-block mb-4" @onclick="Guardar">Guardar vehiculo</button>
+  </form>
+
+
+@code {
+  [Parameter] public int? Id { get; set; }
+  bool _esNuevoVehiculo = true;
+  protected override void OnParametersSet()
+  {
+    if (Id != null)
+    {
+      var vehiculoHallado = ObtenerVehiculoUseCase.Ejecutar(Id.Value);
+      if (vehiculoHallado != null)
+      {
+        _vehiculo = vehiculoHallado;
+        _esNuevoVehiculo=false;
+      }
+    }
+  }
+  Vehiculo vehiculo = new Vehiculo();
+
+  string selectedTitularID = "";
+
+    string SelectedTitularID
+    {
+        get => selectedTitularID;
+        set
+        {
+            selectedTitularID = value;
+
+        }
+    }
+
+  List<Titular> TitularList = new List<Titular>();
+  protected override void OnInitialized()
+  {
+    TitularList = ListarTitularesUseCase.Ejecutar();
+  }
+  Vehiculo _vehiculo = new Vehiculo();
+  void Guardar()
+  {
+    if (_esNuevoVehiculo)
+    {
+      AgregarVehiculoUseCase.Ejecutar(_vehiculo);
+    } 
+    else 
+    {
+      ModificarVehiculoUseCase.Ejecutar(_vehiculo);
+    }
+
+    _vehiculo = new Vehiculo();
+    Navegador.NavigateTo("titulares");
+  }
+  @*  *@
+
+
+
+}

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Aseguradora.UI.Data;
 
 using Aseguradora.Repositorios;
 using Aseguradora.Aplicacion;
@@ -10,12 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddTransient<AgregarVehiculoUseCase>();
 builder.Services.AddTransient<ListarVehiculosUseCase>();
 builder.Services.AddTransient<EliminarVehiculoUseCase>();
 builder.Services.AddTransient<ModificarVehiculoUseCase>();
+builder.Services.AddTransient<ObtenerVehiculoUseCase>();
 builder.Services.AddScoped<IRepositorioVehiculo, RepositorioVehiculoTXT>();
 
 builder.Services.AddTransient<AgregarTitularUseCase>();

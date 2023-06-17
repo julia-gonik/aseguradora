@@ -1,6 +1,7 @@
 ﻿@page "/titulares"
 @inject NavigationManager Navegador
 @inject ListarTitularesUseCase ListarTitularesUseCase
+@inject EliminarTitularUseCase EliminarTitularUseCase
 
 <PageTitle>Titulares</PageTitle>
 
@@ -44,12 +45,14 @@
             <button class="btn btn-primary" @onclick="()=>ModificarTitular(titular)" >
               <span class="oi oi-pencil" ></span>
             </button>
-            <button class="btn btn-primary" @onclick=EliminarTitular>
+            <button class="btn btn-danger" @onclick="() => MostarDialogoDeEliminar(titular)">
               <span class="oi oi-trash" ></span>
             </button>
-            <DialogoConfirmacion @ref=dialogo Mensaje="¿Estas seguro que deseas borrar el titular?"/>
-            <span class="oi oi-pencil"></span>
-          </div>
+            <DialogoConfirmacion 
+              @ref=dialogo 
+              Mensaje="¿Estas seguro que deseas borrar el titular?"
+              OnConfirmado=EliminarTitular />
+          </div>  
         </td>
       </tr>
     }
@@ -61,6 +64,15 @@
 
   DialogoConfirmacion dialogo = null!;
   List<Titular> titulares = new List<Titular>();
+  Titular? _titularAEliminar = null;
+  
+  private void EliminarTitular() {
+    if (_titularAEliminar != null) {
+      EliminarTitularUseCase.Ejecutar(_titularAEliminar.Id);
+      titulares = ListarTitularesUseCase.Ejecutar();
+    }
+  }
+
   protected override void OnInitialized()
   {
     titulares = ListarTitularesUseCase.Ejecutar();
@@ -81,7 +93,9 @@
     Navegador.NavigateTo($"titular/{titular.Id}/vehiculos");
   }
   
-  void EliminarTitular() {
+  void MostarDialogoDeEliminar(Titular t) {
+    _titularAEliminar = t;
+    
     dialogo.Mostrar();
   }
 }
