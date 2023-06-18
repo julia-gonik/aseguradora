@@ -1155,19 +1155,19 @@
     ]
   },
   "packageFolders": {
-    "/home/julia/.nuget/packages/": {}
+    "/home/calvo/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj",
+      "projectUniqueName": "/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj",
       "projectName": "Aseguradora.Repositorios",
-      "projectPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj",
-      "packagesPath": "/home/julia/.nuget/packages/",
-      "outputPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Repositorios/obj/",
+      "projectPath": "/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/Aseguradora.Repositorios.csproj",
+      "packagesPath": "/home/calvo/.nuget/packages/",
+      "outputPath": "/home/calvo/trabajo/aseguradora/Aseguradora.Repositorios/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/julia/.nuget/NuGet/NuGet.Config"
+        "/home/calvo/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -1179,8 +1179,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {
-              "projectPath": "/home/julia/Documents/Julia/Facultad/dotnet/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj"
+            "/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj": {
+              "projectPath": "/home/calvo/trabajo/aseguradora/Aseguradora.Aplicacion/Aseguradora.Aplicacion.csproj"
             }
           }
         }
@@ -1216,7 +1216,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.107/RuntimeIdentifierGraph.json"
       }
     }
   }

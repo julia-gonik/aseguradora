@@ -1,6 +1,19 @@
 ﻿using Aseguradora.Aplicacion;
 using Aseguradora.Repositorios;
 
+IRepositorioSiniestro repoSiniestro = new RepositorioSiniestro();
+AgregarSiniestroUseCase agregarSiniestro = new AgregarSiniestroUseCase(repoSiniestro);
+ListarSiniestrosUseCase listarSiniestros = new ListarSiniestrosUseCase(repoSiniestro);
+ModificarSiniestroUseCase modificarSiniestro = new ModificarSiniestroUseCase(repoSiniestro);
+EliminarSiniestroUseCase eliminarSiniestro = new EliminarSiniestroUseCase(repoSiniestro);
+
+IRepositorioTercero repoTercero = new RepositorioTercero();
+AgregarTerceroUseCase agregarTercero = new AgregarTerceroUseCase(repoTercero);
+ListarTercerosUseCase listarTerceros = new ListarTercerosUseCase(repoTercero);
+ModificarTerceroUseCase modificarTercero = new ModificarTerceroUseCase(repoTercero);
+EliminarTerceroUseCase eliminarTercero = new EliminarTerceroUseCase(repoTercero);
+
+
 IRepositorioTitular repoTitular = new RepositorioTitularTXT();
 AgregarTitularUseCase agregarTitular = new AgregarTitularUseCase(repoTitular);
 ListarTitularesUseCase listarTitulares = new ListarTitularesUseCase(repoTitular);
@@ -15,7 +28,7 @@ ModificarVehiculoUseCase modificarVehiculo = new ModificarVehiculoUseCase(repoVe
 EliminarVehiculoUseCase eliminarVehiculo = new EliminarVehiculoUseCase(repoVehiculo);
 
 ListarTitularesConSusVehiculosUseCase ListarTitularesConSusVehiculos =
-	new ListarTitularesConSusVehiculosUseCase(repoVehiculo, repoTitular);
+    new ListarTitularesConSusVehiculosUseCase(repoVehiculo, repoTitular);
 
 IRepositorioPoliza repoPoliza = new RepositorioPolizaTXT();
 AgregarPolizaUseCase agregarPoliza = new AgregarPolizaUseCase(repoPoliza);
@@ -23,31 +36,128 @@ ListarPolizasUseCase listarPolizas = new ListarPolizasUseCase(repoPoliza);
 ModificarPolizaUseCase modificarPoliza = new ModificarPolizaUseCase(repoPoliza);
 EliminarPolizaUseCase eliminarPoliza = new EliminarPolizaUseCase(repoPoliza);
 
+// Crear titulares
+List<Titular> titulares = new List<Titular>();
 
-// // Instanciamos titulares
-Titular titular = new Titular {
-	Nombre = "García Juan",
-	DNI = "43552611",
-	Direccion = "13 nro. 546",
-	Telefono = "221-456456",
-	CorreoElectronico = "otroMailNoTomado@gmail.com"
-};
+for (int i = 1; i <= 4; i++)
+{
+    Titular titular = new Titular
+    {
+        Id = i,
+        DNI = $"{i}",
+        Nombre = $"Nombre titular {i}",
+        Telefono = $"Telefono titular {i}",
+        Direccion = $"Direccion titular {i}",
+        CorreoElectronico = $"Correo electrónico titular {i}"
+    };
 
-Titular titular2 = new Titular {
-	Nombre = "Celeste",
-	DNI = "90403849",
-	Direccion = "13 nro. 12",
-	Telefono = "221-904234",
-	CorreoElectronico = "otroem534ail@gmail.com"
-};
+    //titulares.Add(titular);
+    agregarTitular.Ejecutar(titular);
 
-Titular titular3 = new Titular {
-	Nombre = "Alicia Raquel",
-	DNI = "42342345",
-	Direccion = "13 nro. 12",
-	Telefono = "221-904234",
-	CorreoElectronico = "otroe3534mail@gmail.com"
-};
+
+}
+
+// Crear vehículos
+List<Vehiculo> vehiculos = new List<Vehiculo>();
+
+for (int i = 1; i <= 5; i++)
+{
+    Vehiculo vehiculo = new Vehiculo
+    {
+        Id = i,
+        Dominio = $"Dominio vehiculo {i}",
+        Marca = $"Marca vehiculo {i}",
+        AnioFabricacion = $"202{i}",
+        TitularId = i
+    };
+
+	agregarVehiculo.Ejecutar(vehiculo);
+	//vehiculos.Add(vehiculo);
+}
+
+
+// Crear pólizas
+List<Poliza> polizas = new List<Poliza>();
+
+for (int i = 1; i <= 5; i++)
+{
+    Poliza poliza = new Poliza
+    {
+        Id = i,
+        VehiculoId = i,
+        ValorAsegurado = i * 1000,
+        Franquicia = $"Franquicia poliza {i}",
+        TipoCobertura = TipoCobertura.TodoRiesgo,
+        FechaInicioVigencia = DateTime.Now,
+        FechaFinVigencia = DateTime.Now.AddYears(1)
+    };
+
+    agregarPoliza.Ejecutar(poliza);
+    //polizas.Add(poliza);
+}
+
+List<Siniestro> siniestros = new List<Siniestro>();
+
+for (int i = 1; i <= 5; i++)
+{
+    Siniestro siniestro = new Siniestro
+    {
+        Id = i,
+        PolizaId = i,
+        FechaIngreso = DateTime.Now,
+        FechaOcurrencia = DateTime.Now.AddDays(-i),
+        Direccion = $"Dirección siniestro {i}",
+        Descripcion = $"Descripción siniestro {i}"
+    };
+
+    agregarSiniestro.Ejecutar(siniestro);
+    //siniestros.Add(siniestro);
+}
+
+// Crear terceros
+List<Tercero> terceros = new List<Tercero>();
+
+for (int i = 81; i <= 83; i++)
+{
+    Tercero tercero = new Tercero
+    {
+        Id = i,
+        DNI = $"{i}",
+        Nombre = $"Nombre tercero {i}",
+        Telefono = $"Telefono tercero {i}",
+        NombreAseguradora = $"Aseguradora tercero {i}",
+        SiniestroId = i-80
+    };
+
+    agregarTercero.Ejecutar(tercero);
+    //terceros.Add(tercero);
+}
+
+
+modificarTercero.Ejecutar(new Tercero
+    {
+        DNI = $"{82}",
+        Nombre = $"Nombre tercero {1000}",
+        Telefono = $"Telefono tercero {5}",
+        NombreAseguradora = $"Aseguradora tercero {6}",
+        SiniestroId = 82-80
+    });
+modificarSiniestro.Ejecutar(new Siniestro
+    {
+        Id = 3,
+        PolizaId = 3,
+        FechaIngreso = DateTime.Now,
+        FechaOcurrencia = DateTime.Now.AddDays(-3),
+        Direccion = $"Dirección siniestro {3}",
+        Descripcion = $"Descripción {3}"
+    });
+
+listarPolizas.Ejecutar().ForEach(poliza => Console.WriteLine(poliza));
+listarSiniestros.Ejecutar().ForEach(s => Console.WriteLine(s));
+listarTerceros.Ejecutar().ForEach(tercero => Console.WriteLine(tercero));
+
+
+
 
 // Titular titular4 = new Titular {
 // 	Nombre = "Ana García",
@@ -57,14 +167,19 @@ Titular titular3 = new Titular {
 // 	CorreoElectronico = "otroemail@gmail.com"
 // };
 
-Console.WriteLine($"Agregando titular {titular.DNI}");
-agregarTitular.Ejecutar(titular);
 
-Console.WriteLine($"Agregando titular {titular2.DNI}");
-agregarTitular.Ejecutar(titular2);
+// Console.WriteLine($"Agregando titular {titular2.DNI}");
+// agregarTitular.Ejecutar(titular2);
 
-Console.WriteLine($"Agregando titular {titular3.DNI}");
-agregarTitular.Ejecutar(titular3);
+// Console.WriteLine($"Agregando titular {titular.DNI}");
+// agregarTitular.Ejecutar(titular);
+
+
+// Console.WriteLine($"Agregando titular {titular3.DNI}");
+// agregarTitular.Ejecutar(titular3);
+
+
+listarTitulares.Ejecutar().ForEach(titular => Console.WriteLine(titular));
 
 // Console.WriteLine($"Agregando titular {titular4.DNI}");
 // agregarTitular.Ejecutar(titular4);
@@ -106,30 +221,6 @@ agregarTitular.Ejecutar(titular3);
 // ListarTitularesConSusVehiculos.Ejecutar().ForEach(titular => Console.WriteLine(titular));
 
 
-Vehiculo vehiculo1 = new Vehiculo 
-{ 
-	Dominio = "PPP123", 
-	Marca = "Toyota", 
-	AnioFabricacion = "2010", 
-	TitularId = 2
-};
-
-
-Vehiculo vehiculo2 = new Vehiculo 
-{ 
-	Dominio = "DEF456", 
-	Marca = "Ford", 
-	AnioFabricacion = "2015", 
-	TitularId = 2
-};
-
-Vehiculo vehiculo3 = new Vehiculo 
-{ 
-	Dominio = "GHI789", 
-	Marca = "Chevrolet", 
-	AnioFabricacion = "2020", 
-	TitularId = 2
-};
 
 // Vehiculo vehiculo4 = new Vehiculo 
 // { 
@@ -188,24 +279,24 @@ Vehiculo vehiculo3 = new Vehiculo
 // };
 
 
-agregarVehiculo.Ejecutar(vehiculo1);
-Console.WriteLine($"Agregando Vehiculo {vehiculo1}");
+//agregarVehiculo.Ejecutar(vehiculo1);
+//Console.WriteLine($"Agregando Vehiculo {vehiculo1}");
+//
+//
+//agregarVehiculo.Ejecutar(vehiculo2);
+//Console.WriteLine($"Agregando Vehiculo {vehiculo2}");
 
-
-agregarVehiculo.Ejecutar(vehiculo2);
-Console.WriteLine($"Agregando Vehiculo {vehiculo2}");
-
-agregarTitular.Ejecutar(titular);
+//agregarTitular.Ejecutar(titular);
 
 // agregarVehiculo.Ejecutar(vehiculo2);
 // Console.WriteLine($"Agregando Vehiculo {vehiculo2}");
 
-agregarVehiculo.Ejecutar(vehiculo3);
-Console.WriteLine($"Agregando Vehiculo {vehiculo3}");
+// agregarVehiculo.Ejecutar(vehiculo3);
+// Console.WriteLine($"Agregando Vehiculo {vehiculo3}");
 
 
-Console.WriteLine("Lista de titulares");
-listarTitulares.Ejecutar().ForEach(titular => Console.WriteLine(titular));
+// Console.WriteLine("Lista de titulares");
+// listarTitulares.Ejecutar().ForEach(titular => Console.WriteLine(titular));
 
 
 // agregarVehiculo.Ejecutar(vehiculo4);
