@@ -1,0 +1,58 @@
+@page "/poliza"
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+
+<EditForm Model="@poliza" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label for="valorAsegurado">Valor Asegurado</label>
+        <InputNumber id="valorAsegurado" class="form-control" @bind-Value="@poliza.ValorAsegurado" />
+        <ValidationMessage For="@(() => poliza.ValorAsegurado)" />
+    </div>
+
+    <div class="form-group">
+        <label for="franquicia">Franquicia</label>
+        <InputText id="franquicia" class="form-control" @bind-Value="@poliza.Franquicia" />
+        <ValidationMessage For="@(() => poliza.Franquicia)" />
+    </div>
+
+    <div class="form-group">
+        <label for="tipoCobertura">Tipo de Cobertura</label>
+        <select id="tipoCobertura" class="form-control" @bind="@poliza.TipoCobertura">
+            <option value="ResponsabilidadCivil">Responsabilidad Civil</option>
+            <option value="TodoRiesgo">Todo Riesgo</option>
+        </select>
+        <ValidationMessage For="@(() => poliza.TipoCobertura)" />
+    </div>
+
+    <div class="form-group">
+        <label for="fechaInicioVigencia">Fecha de Inicio de Vigencia</label>
+        <InputDate id="fechaInicioVigencia" class="form-control" @bind-Value="@poliza.FechaInicioVigencia" />
+        <ValidationMessage For="@(() => poliza.FechaInicioVigencia)" />
+    </div>
+
+    <div class="form-group">
+        <label for="fechaFinVigencia">Fecha de Fin de Vigencia</label>
+        <InputDate id="fechaFinVigencia" class="form-control" @bind-Value="@poliza.FechaFinVigencia" />
+        <ValidationMessage For="@(() => poliza.FechaFinVigencia)" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear Poliza</button>
+</EditForm>
+
+@code {
+    private Poliza poliza = new Poliza();
+
+    private void HandleValidSubmit()
+    {
+        // Aquí puedes realizar la lógica para guardar la poliza en tu base de datos
+        // por ejemplo, llamar a un servicio o almacenarla en una lista
+        // En este ejemplo, simplemente imprimimos los valores en la consola
+        Console.WriteLine($"Valor Asegurado: {poliza.ValorAsegurado}");
+        Console.WriteLine($"Franquicia: {poliza.Franquicia}");
+        Console.WriteLine($"Tipo de Cobertura: {poliza.TipoCobertura}");
+        Console.WriteLine($"Fecha de Inicio de Vigencia: {poliza.FechaInicioVigencia}");
+        Console.WriteLine($"Fecha de Fin de Vigencia: {poliza.FechaFinVigencia}");
+    }
+}
