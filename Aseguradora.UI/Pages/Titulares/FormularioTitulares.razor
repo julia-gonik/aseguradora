@@ -1,0 +1,85 @@
+@page "/titular/{Id:int?}"
+@inject NavigationManager Navegador;
+@inject AgregarTitularUseCase AgregarTitularUseCase;
+@inject ModificarTitularUseCase ModificarTitularUseCase;
+@inject ObtenerTitularUseCase ObtenerTitularUseCase;
+
+<PageTitle>Titulares</PageTitle>
+
+  @if (_esNuevoTitular)
+  {
+    <h3>Agregando un nuevo Titular</h3>
+  }
+  else
+  {
+    <h3>Modificando al Titular "@_titular.Nombre"</h3>
+  }
+<EditForm Model="_titular" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label for="dni">DNI</label>
+        <InputText id="dni" class="form-control" @bind-Value="_titular.DNI" />
+        <ValidationMessage For="@(() => _titular.DNI)" />
+    </div>
+
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <InputText id="nombre" class="form-control" @bind-Value="_titular.Nombre" />
+        <ValidationMessage For="@(() => _titular.Nombre)" />
+    </div>
+
+    <div class="form-group">
+        <label for="direccion">Dirección</label>
+        <InputText id="direccion" class="form-control" @bind-Value="_titular.Direccion" />
+        <ValidationMessage For="@(() => _titular.Direccion)" />
+    </div>
+
+    <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <InputText id="telefono" class="form-control" @bind-Value="_titular.Telefono" />
+        <ValidationMessage For="@(() => _titular.Telefono)" />
+    </div>
+
+    <div class="form-group">
+        <label for="email">Correo Electrónico</label>
+        <InputText id="email" class="form-control" @bind-Value="_titular.CorreoElectronico" />
+        <ValidationMessage For="@(() => _titular.CorreoElectronico)" />
+    </div>
+
+    <button  type="submit" class="btn btn-primary btn-block mb-4" @onclick="Guardar">Guardar titular</button>
+</EditForm>
+
+
+@code {
+
+  [Parameter] public int? Id { get; set; }
+  bool _esNuevoTitular = true;
+  protected override void OnParametersSet()
+  {
+    if (Id != null)
+    {
+      var titular_hallado = ObtenerTitularUseCase.Ejecutar(Id.Value);
+      if (titular_hallado != null)
+      {
+        _titular = titular_hallado;
+        _esNuevoTitular=false;
+      }
+    }
+  }
+  Titular _titular = new Titular();
+  void Guardar()
+  {
+    if (_esNuevoTitular)
+    {
+      AgregarTitularUseCase.Ejecutar(_titular);
+    } 
+    else 
+    {
+      ModificarTitularUseCase.Ejecutar(_titular);
+    }
+
+    _titular = new Titular();
+    Navegador.NavigateTo("titulares");
+  }
+}

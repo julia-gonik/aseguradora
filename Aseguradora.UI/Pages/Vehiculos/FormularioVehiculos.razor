@@ -1,0 +1,87 @@
+@page "/vehiculo/{Id:int?}"
+@inject NavigationManager Navegador;
+@inject AgregarVehiculoUseCase AgregarVehiculoUseCase;
+@inject ModificarVehiculoUseCase ModificarVehiculoUseCase;
+@inject ObtenerVehiculoUseCase ObtenerVehiculoUseCase;
+@inject ObtenerTitularUseCase ObtenerTitularUseCase;
+@inject ListarTitularesUseCase ListarTitularesUseCase;
+
+<PageTitle>Vehiculos</PageTitle>
+
+@if (_esNuevoVehiculo)
+{
+      <h3>Agregando un nuevo Vehiculo</h3>
+}
+else
+{
+      <h3>Modificando al Vehiculo con patente "@_vehiculo.Dominio"</h3>
+}
+ <form>
+    <div class="form-group">
+      <label for="dominio">Dominio</label>
+      <InputText id="dominio" class="form-control" @bind-Value="@_vehiculo.Dominio" />
+      <ValidationMessage For="@(() => _vehiculo.Dominio)" />
+    </div>
+    <div class="form-group">
+      <label for="marca">Marca</label>
+      <InputText id="marca" class="form-control" @bind-Value="@_vehiculo.Marca" />
+      <ValidationMessage For="@(() => _vehiculo.Marca)" />
+    </div>
+    <div class="form-group">
+      <label for="anioFabricacion">Año de Fabricación</label>
+      <InputText id="anioFabricacion" class="form-control" @bind-Value="@_vehiculo.AnioFabricacion" />
+      <ValidationMessage For="@(() => _vehiculo.AnioFabricacion)" />
+    </div>
+
+    <div class="form-group">
+        <label for="TitularId">Select Titular:</label>
+        <select class="form-control" id="TitularId" name="TitularId" @bind="_vehiculo.TitularId" required>
+            <option value="">Select a Titular</option>
+            @foreach (var titular in TitularList)
+            {
+              <option value="@titular.Id">@titular.Nombre</option>
+            }
+        </select>
+      <ValidationMessage For="@(() => _vehiculo.TitularId)" />
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block mb-4" @onclick="Guardar">Guardar vehiculo</button>
+  </form>
+
+
+@code {
+  [Parameter] public int? Id { get; set; }
+  bool _esNuevoVehiculo = true;
+  protected override void OnParametersSet()
+  {
+    if (Id != null)
+    {
+      var vehiculoHallado = ObtenerVehiculoUseCase.Ejecutar(Id.Value);
+      if (vehiculoHallado != null)
+      {
+        _vehiculo = vehiculoHallado;
+        _esNuevoVehiculo=false;
+      }
+    }
+  }
+  List<Titular> TitularList = new List<Titular>();
+  protected override void OnInitialized()
+  {
+    TitularList = ListarTitularesUseCase.Ejecutar();
+  }
+  Vehiculo _vehiculo = new Vehiculo();
+  void Guardar()
+  {
+    if (_esNuevoVehiculo)
+    {
+      AgregarVehiculoUseCase.Ejecutar(_vehiculo);
+    } 
+    else 
+    {
+      ModificarVehiculoUseCase.Ejecutar(_vehiculo);
+    }
+
+    _vehiculo = new Vehiculo();
+    Navegador.NavigateTo("vehiculos");
+  }
+}

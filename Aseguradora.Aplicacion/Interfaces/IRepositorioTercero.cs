@@ -6,5 +6,7 @@ namespace Aseguradora.Aplicacion
         void ModificarTercero(Tercero tercero);
         void EliminarTercero(int id);
         List<Tercero> ListarTercero();
+        Tercero? ObtenerTercero(int id);
+
     }
 }

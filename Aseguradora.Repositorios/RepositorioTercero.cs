@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Aseguradora.Aplicacion;
 
 namespace Aseguradora.Repositorios
@@ -32,7 +33,7 @@ namespace Aseguradora.Repositorios
             }
             using (var db = new AseguradoraContext())
             {
-                var terceros = db.Terceros.ToList();
+                var terceros = db.Terceros.Include(t => t.Siniestro).ToList();
                 return terceros;
             }
         }
@@ -49,7 +50,7 @@ namespace Aseguradora.Repositorios
 
                 if (tercero == null)
                 {
-                    throw new Exception($"No se ha encontrado el titular con id {id} a eliminar");
+                    throw new Exception($"No se ha encontrado el tercero con id {id} a eliminar");
                 }
 
                 db.Remove(tercero);
@@ -78,6 +79,14 @@ namespace Aseguradora.Repositorios
                     tercerodb.Siniestro = tercero.Siniestro;
                 }
                 db.SaveChanges();
+            }
+        }
+
+        public Tercero? ObtenerTercero(int id)
+        {
+            using (var db = new AseguradoraContext())
+            {
+                return db.Terceros.Find(id);
             }
         }
     }

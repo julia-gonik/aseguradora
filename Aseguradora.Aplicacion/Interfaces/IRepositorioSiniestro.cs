@@ -6,5 +6,6 @@ namespace Aseguradora.Aplicacion
         void ModificarSiniestro(Siniestro siniestro);
         void EliminarSiniestro(int id);
         List<Siniestro> ListarSiniestro();
+        Siniestro? ObtenerSiniestro(int id);
     }
 }

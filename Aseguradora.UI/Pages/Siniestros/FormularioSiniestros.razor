@@ -1,0 +1,105 @@
+@page "/siniestro/{Id:int?}"
+@inject NavigationManager Navegador;
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject AgregarSiniestroUseCase AgregarSiniestroUseCase;
+@inject ModificarSiniestroUseCase ModificarSiniestroUseCase;
+@inject ObtenerSiniestroUseCase ObtenerSiniestroUseCase;
+@inject ObtenerPolizaUseCase ObtenerPolizaUseCase;
+@inject ListarPolizasUseCase ListarPolizasUseCase;
+
+<PageTitle>Siniestros</PageTitle>
+
+ @if (_esNuevoSiniestro)
+  {
+    <h3>Agregando un nuevo Siniestro</h3>
+  }
+  else
+  {
+    <h3>Modificando Siniestro</h3>
+  }
+
+<EditForm Model="@siniestro" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label for="descripcion">Valor Asegurado</label>
+        <InputText id="descripcion" class="form-control" @bind-Value="@siniestro.Descripcion" />
+        <ValidationMessage For="@(() => siniestro.Descripcion)" />
+    </div>
+
+    <div class="form-group">
+        <label for="direccion">Direccion</label>
+        <InputText id="direccion" class="form-control" @bind-Value="@siniestro.Direccion" />
+        <ValidationMessage For="@(() => siniestro.Direccion)" />
+    </div>
+
+    <div class="form-group">
+        <label for="fechaOcurrencia">Fecha de Ocurrencia</label>
+        <InputDate id="fechaOcurrencia" class="form-control" @bind-Value="@siniestro.FechaOcurrencia" />
+        <ValidationMessage For="@(() => siniestro.FechaOcurrencia)" />
+    </div>
+
+    <div class="form-group">
+        <label for="FechaIngreso">Fecha de Ingreso</label>
+        <InputDate id="FechaIngreso" class="form-control" @bind-Value="@siniestro.FechaIngreso" />
+        <ValidationMessage For="@(() => siniestro.FechaIngreso)" />
+    </div>
+
+    <div class="form-group">
+        <label for="PolizaId">Seleccionar Poliza:</label>
+        <select class="form-control" id="PolizaId" name="PolizaId" @bind="siniestro.PolizaId" required>
+          <option value="">Select a Titular</option>
+          @foreach (var poliza in PolizasList)
+          {
+            <option value="@poliza.Id">@poliza.Id</option>
+          }
+        </select>
+        <ValidationMessage For="@(() => siniestro.PolizaId)" />
+    </div>
+
+
+    <button type="submit" @onclick="HandleValidSubmit" class="btn btn-primary">Crear Siniestro</button>
+</EditForm>
+
+@code {
+  [Parameter] public int? Id { get; set; }
+  bool _esNuevoSiniestro = true;
+
+  // Formulario
+  protected override void OnParametersSet()
+  {
+    if (Id != null)
+    {
+      var siniestroHallado = ObtenerSiniestroUseCase.Ejecutar(Id.Value);
+      if (siniestroHallado != null)
+      {
+        siniestro = siniestroHallado;
+        _esNuevoSiniestro=false;
+      }
+    }
+  }
+  List<Poliza> PolizasList = new List<Poliza>();
+  protected override void OnInitialized()
+  {
+    PolizasList = ListarPolizasUseCase.Ejecutar();
+  }
+
+  // Guardado
+  Siniestro siniestro = new Siniestro();
+  private void HandleValidSubmit()
+  {
+    if (_esNuevoSiniestro)
+    {
+      AgregarSiniestroUseCase.Ejecutar(siniestro);
+    } 
+    else 
+    {
+      ModificarSiniestroUseCase.Ejecutar(siniestro);
+    }
+
+    siniestro = new Siniestro();
+    Navegador.NavigateTo("siniestros");
+  }
+}

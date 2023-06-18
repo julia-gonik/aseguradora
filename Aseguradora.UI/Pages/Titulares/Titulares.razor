@@ -1,0 +1,101 @@
+﻿@page "/titulares"
+@inject NavigationManager Navegador
+@inject ListarTitularesUseCase ListarTitularesUseCase
+@inject EliminarTitularUseCase EliminarTitularUseCase
+
+<PageTitle>Titulares</PageTitle>
+
+<h1 style="margin-bottom: 20px;">Titulares</h1>
+
+<button type="button" class="btn btn-primary btn-block mb-4" @onclick="CrearTitular">
+   <span class="oi oi-plus"></span>
+   Crear Titular
+  </button>
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>DNI</th>
+      <th>Dirección</th>
+      <th>Teléfono</th>
+      <th>Correo Electrónico</th>
+      <th>Vehículos</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    @foreach (var titular in titulares)
+    {
+      <tr>
+        <td>@titular.Id</td>
+        <td>@titular.Nombre</td>
+        <td>@titular.DNI</td>
+        <td>@titular.Direccion</td>
+        <td>@titular.Telefono</td>
+        <td>@titular.CorreoElectronico</td>
+        <td>
+          <button class="btn btn-primary" @onclick="()=>IrAVehiculos(titular)" >
+            Listar Vehiculos
+          </button>
+        </td>
+        <td>
+          <div class="action-icons">
+            <button class="btn btn-primary" @onclick="()=>ModificarTitular(titular)" >
+              <span class="oi oi-pencil" ></span>
+            </button>
+            <button class="btn btn-danger" @onclick="() => MostarDialogoDeEliminar(titular)">
+              <span class="oi oi-trash" ></span>
+            </button>
+          </div>  
+            <DialogoConfirmacion 
+              @ref=dialogo 
+              Mensaje="¿Estas seguro que deseas borrar el titular?"
+              OnConfirmado=EliminarTitular />
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+@code {
+
+  DialogoConfirmacion dialogo = null!;
+  List<Titular> titulares = new List<Titular>();
+  Titular? _titularAEliminar = null;
+  
+  private void EliminarTitular() {
+    if (_titularAEliminar != null) {
+      EliminarTitularUseCase.Ejecutar(_titularAEliminar.Id);
+      titulares = ListarTitularesUseCase.Ejecutar();
+    }
+  }
+
+  protected override void OnInitialized()
+  {
+    titulares = ListarTitularesUseCase.Ejecutar();
+  }
+
+  void CrearTitular()
+  {
+    Navegador.NavigateTo("titular");
+  }
+
+  void ModificarTitular(Titular titular)
+  {
+    Navegador.NavigateTo($"titular/{titular.Id}");
+  }
+
+  void IrAVehiculos(Titular titular)
+  {
+    Navegador.NavigateTo($"titular/{titular.Id}/vehiculos");
+  }
+  
+  void MostarDialogoDeEliminar(Titular t) {
+    _titularAEliminar = t;
+    
+    dialogo.Mostrar();
+  }
+}

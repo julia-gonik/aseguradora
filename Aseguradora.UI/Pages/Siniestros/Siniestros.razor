@@ -1,0 +1,94 @@
+﻿@page "/siniestros"
+@inject NavigationManager Navegador;
+@inject ListarSiniestrosUseCase ListarSiniestrosUseCase;
+@inject EliminarSiniestroUseCase EliminarSiniestroUseCase;
+
+<PageTitle>Siniestros</PageTitle>
+
+<h1 style="margin-bottom: 20px;">Siniestros</h1>
+
+<button type="button" class="btn btn-primary btn-block mb-4" @onclick="CrearSiniestro">
+   <span class="oi oi-plus"></span>
+   Crear Siniestro
+  </button>
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Descripcion</th>
+      <th>Direccion</th>
+      <th>FechaIngreso</th>
+      <th>FechaOcurrencia</th>
+      <th>Poliza</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    @foreach (var siniestro in siniestros)
+    {
+      <tr>
+        <td>@siniestro.Id</td>
+        <td>@siniestro.Descripcion</td>
+        <td>@siniestro.Direccion</td>
+        <td>@siniestro.FechaIngreso</td>
+        <td>@siniestro.FechaOcurrencia</td>
+        <td>@siniestro.Poliza</td>
+        <td>
+          <div class="action-icons">
+            <button class="btn btn-primary" @onclick="()=>ModificarSiniestro(siniestro)" >
+              <span class="oi oi-pencil" ></span>
+            </button>
+            <button class="btn btn-danger" @onclick="() => MostarDialogoDeEliminar(siniestro)">
+              <span class="oi oi-trash" ></span>
+            </button>
+          </div>
+          <DialogoConfirmacion 
+            @ref=dialogo 
+            Mensaje="¿Estas seguro que deseas borrar la siniestro?"
+            OnConfirmado=EliminarSiniestro />
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+@code {
+  DialogoConfirmacion dialogo = null!;
+  List<Siniestro> siniestros = new List<Siniestro>();
+  Siniestro? _siniestroAEliminar = null;
+  
+  private void EliminarSiniestro() {
+    if (_siniestroAEliminar != null) {
+      EliminarSiniestroUseCase.Ejecutar(_siniestroAEliminar.Id);
+      siniestros = ListarSiniestrosUseCase.Ejecutar();
+    }
+  }
+
+  protected override void OnInitialized()
+  {
+    siniestros = ListarSiniestrosUseCase.Ejecutar();
+  }
+
+  void CrearSiniestro()
+  {
+    Navegador.NavigateTo("siniestro");
+  }
+
+  void ModificarSiniestro(Siniestro siniestro)
+  {
+    Navegador.NavigateTo($"siniestro/{siniestro.Id}");
+  }
+
+  void IrASiniestros(Siniestro siniestro)
+  {
+    Navegador.NavigateTo($"siniestro/{siniestro.Id}/siniestros");
+  }
+  
+  void MostarDialogoDeEliminar(Siniestro p) {
+    _siniestroAEliminar = p;
+    
+    dialogo.Mostrar();
+  }
+}
