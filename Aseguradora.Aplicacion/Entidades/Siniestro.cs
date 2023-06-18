@@ -10,18 +10,9 @@ public class Siniestro
     public string Direccion { get; set; } = "";
     public string Descripcion { get; set; } = "";
 
-    public Siniestro(ValidarUseCase validarUseCase, int polizaId)
+    public Siniestro()
     {
         FechaIngreso = DateTime.Now;
-
-        // Llamar al delegado para verificar si es válido
-        bool esValido = validarUseCase.Ejecutar(polizaId, FechaIngreso);
-
-        if (!esValido)
-        {
-            throw new SiniestroFueraDeVigenciaException("No es posible registrar el siniestro");
-        }
-        PolizaId = polizaId;
     }
 
     public override string ToString()
