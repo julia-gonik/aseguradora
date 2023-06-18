@@ -36,6 +36,8 @@ ListarPolizasUseCase listarPolizas = new ListarPolizasUseCase(repoPoliza);
 ModificarPolizaUseCase modificarPoliza = new ModificarPolizaUseCase(repoPoliza);
 EliminarPolizaUseCase eliminarPoliza = new EliminarPolizaUseCase(repoPoliza);
 
+ValidarUseCase validarUseCase = new ValidarUseCase(repoPoliza);
+
 // Crear titulares
 List<Titular> titulares = new List<Titular>();
 
@@ -100,18 +102,16 @@ List<Siniestro> siniestros = new List<Siniestro>();
 
 for (int i = 1; i <= 5; i++)
 {
-    Siniestro siniestro = new Siniestro
-    {
-        Id = i,
-        PolizaId = i,
-        FechaIngreso = DateTime.Now,
-        FechaOcurrencia = DateTime.Now.AddDays(-i),
-        Direccion = $"Dirección siniestro {i}",
-        Descripcion = $"Descripción siniestro {i}"
-    };
+    Siniestro siniestro = new Siniestro(validarUseCase,i);
+    siniestro.Id = i;
+    siniestro.Poliza = new Poliza { Id = i, /* Agregar propiedades de la poliza */ };
+    siniestro.FechaOcurrencia = DateTime.Now;
+    siniestro.Direccion = "Dirección del siniestro";
+    siniestro.Descripcion = "Descripción del siniestro";
 
+    // Imprimir el siniestro
     agregarSiniestro.Ejecutar(siniestro);
-    //siniestros.Add(siniestro);
+    Console.WriteLine(siniestro.ToString());
 }
 
 // Crear terceros
@@ -142,15 +142,18 @@ modificarTercero.Ejecutar(new Tercero
         NombreAseguradora = $"Aseguradora tercero {6}",
         SiniestroId = 82-80
     });
-modificarSiniestro.Ejecutar(new Siniestro
-    {
-        Id = 3,
-        PolizaId = 3,
-        FechaIngreso = DateTime.Now,
-        FechaOcurrencia = DateTime.Now.AddDays(-3),
-        Direccion = $"Dirección siniestro {3}",
-        Descripcion = $"Descripción {3}"
-    });
+
+
+
+// modificarSiniestro.Ejecutar(new Siniestro
+//     {
+//         Id = 3,
+//         PolizaId = 3,
+//         FechaIngreso = DateTime.Now,
+//         FechaOcurrencia = DateTime.Now.AddDays(-3),
+//         Direccion = $"Dirección siniestro {3}",
+//         Descripcion = $"Descripción {3}"
+//     });
 
 listarPolizas.Ejecutar().ForEach(poliza => Console.WriteLine(poliza));
 listarSiniestros.Ejecutar().ForEach(s => Console.WriteLine(s));
