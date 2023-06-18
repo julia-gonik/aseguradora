@@ -14,4 +14,16 @@ public class Siniestro
     {
         FechaIngreso = DateTime.Now;
     }
+
+    public override string ToString()
+    {
+        return $"Siniestro Id: {Id}\n" +
+               $"PolizaId: {PolizaId}\n" +
+               $"Poliza: {Poliza?.ToString() ?? "N/A"}\n" +
+               $"Fecha de Ingreso: {FechaIngreso}\n" +
+               $"Fecha de Ocurrencia: {FechaOcurrencia}\n" +
+               $"Dirección: {Direccion}\n" +
+               $"Descripción: {Descripcion}";
+    }
+
 }
