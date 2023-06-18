@@ -6,5 +6,6 @@ namespace Aseguradora.Aplicacion
         void ModificarPoliza(Poliza poliza);
         void EliminarPoliza(int id);
         List<Poliza> ListarPolizas();
+        public Poliza? ObtenerPoliza(int id);
     }
 }

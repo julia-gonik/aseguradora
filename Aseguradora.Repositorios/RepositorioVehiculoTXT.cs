@@ -4,8 +4,6 @@ namespace Aseguradora.Repositorios;
 
 public class RepositorioVehiculoTXT : IRepositorioVehiculo
 {
-    readonly string _nombreArch = "vehiculos.txt";
-
     public void AgregarVehiculo(Vehiculo vehiculo)
     {
         using (var db = new AseguradoraContext())
@@ -16,7 +14,7 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
         {
             try
             {
-                Console.WriteLine(db.Vehiculos.Add(vehiculo));
+                db.Vehiculos.Add(vehiculo);
                 db.SaveChanges();
             }
             catch (Exception ex)
@@ -71,86 +69,25 @@ public class RepositorioVehiculoTXT : IRepositorioVehiculo
         }
     }
 
-
-    public List<Vehiculo> ListarVehiculosPorTitular(int TitularId)
-    {
-        var vehiculosTitular = new List<Vehiculo>();
-        if (File.Exists(_nombreArch))
-        {
-            using var sr = new StreamReader(_nombreArch);
-            while (!sr.EndOfStream)
-            {
-                var vehiculo = new Vehiculo();
-                vehiculo.Id = int.Parse(sr.ReadLine() ?? "");
-                vehiculo.Dominio = sr.ReadLine() ?? "";
-                vehiculo.Marca = sr.ReadLine() ?? "";
-                // vehiculo.AnioFabricacion = int.Parse(sr.ReadLine() ?? "");
-                // vehiculo.TitularId = int.Parse(sr.ReadLine() ?? "");
-
-                // if (vehiculo.TitularId == TitularId)
-                // {
-                // 	vehiculosTitular.Add(vehiculo);
-                // }
-            }
-        }
-        return vehiculosTitular;
-    }
-
-
     public void ModificarVehiculo(Vehiculo vehiculo)
     {
-        string archivoTemporal = "vehiculos_temp.txt";
 
-        try
+        using (var db = new AseguradoraContext())
         {
-            // Crear un archivo temporal para almacenar los vehículos modificados
-            using var sw = new StreamWriter(archivoTemporal);
-
-            // Abrir el archivo original para leer los vehículos
-            using var sr = new StreamReader(_nombreArch);
-            bool found = false;
-
-            while (!sr.EndOfStream)
-            {
-                // Leer el Id y los datos del vehículo
-                int VehiculoId = int.Parse(sr.ReadLine() ?? "");
-                string VehiculoDominio = sr.ReadLine() ?? "";
-                string VehiculoMarca = sr.ReadLine() ?? "";
-                int VehiculoAnioFabricacion = int.Parse(sr.ReadLine() ?? "");
-                int VehiculoTitularId = int.Parse(sr.ReadLine() ?? "");
-
-                if (VehiculoId == vehiculo.Id)
-                {
-                    // Escribir el nuevo vehículo en lugar del vehículo original
-                    sw.WriteLine(vehiculo.Id);
-                    sw.WriteLine(vehiculo.Dominio);
-                    sw.WriteLine(vehiculo.Marca);
-                    sw.WriteLine(vehiculo.AnioFabricacion);
-                    // sw.WriteLine(vehiculo.TitularId);
-                    found = true;
-                }
-                else
-                {
-                    // Escribir el vehículo original en el archivo temporal
-                    sw.WriteLine(VehiculoId);
-                    sw.WriteLine(VehiculoDominio);
-                    sw.WriteLine(VehiculoMarca);
-                    sw.WriteLine(VehiculoAnioFabricacion);
-                    sw.WriteLine(VehiculoTitularId);
-                }
-            }
-
-            File.Delete(_nombreArch);
-            File.Move(archivoTemporal, _nombreArch);
-
-            if (!found)
-            {
-                throw new Exception($"No se ha encontrado el vehiculo {vehiculo} a modificar");
-            }
+            db.Database.EnsureCreated();
         }
-        catch (Exception ex)
+        using (var db = new AseguradoraContext())
         {
-            Console.WriteLine("Ocurrió un error: " + ex.Message);
+            var vehiculodb = db.Vehiculos.Find(vehiculo.Id);
+            if (vehiculodb != null)
+            {
+                vehiculodb.Id = vehiculo.Id;
+                vehiculodb.TitularId = vehiculo.TitularId;
+                vehiculodb.Dominio = vehiculo.Dominio;
+                vehiculodb.Marca = vehiculo.Marca;
+                vehiculodb.AnioFabricacion = vehiculo.AnioFabricacion;
+            }
+            db.SaveChanges();
         }
     }
 

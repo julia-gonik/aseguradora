@@ -5,8 +5,6 @@ namespace Aseguradora.Repositorios
 {
     public class RepositorioTitularTXT : IRepositorioTitular
     {
-        readonly string _nombreArch = "titulares.txt";
-
         public void AgregarTitular(Titular titular)
         {
             using (var db = new AseguradoraContext())
@@ -83,10 +81,28 @@ namespace Aseguradora.Repositorios
             }
         }
 
-        public Titular ObtenerVehiculosDeTitular(Titular titular, Func<int, List<Vehiculo>> listaVehiculos)
+        public Titular? ObtenerTitular(int id)
         {
-            titular.Vehiculos = listaVehiculos(titular.Id);
-            return titular;
+            using (var db = new AseguradoraContext())
+            {
+                return db.Titulares.Find(id);
+            }
+        }
+
+
+        public List<Titular> ListarTitularesConSusVehiculos()
+        {
+
+            using (var db = new AseguradoraContext())
+            {
+                db.Database.EnsureCreated();
+            }
+            using (var db = new AseguradoraContext())
+            {
+                var titulares = db.Titulares.Include(t => t.Vehiculos).ToList();
+
+                return titulares;
+            }
         }
     }
 }
