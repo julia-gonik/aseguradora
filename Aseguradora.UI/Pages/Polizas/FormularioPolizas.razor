@@ -59,7 +59,7 @@
     <div class="form-group">
         <label for="VehiculoId">Seleccionar Vehiculo:</label>
         <select class="form-control" id="VehiculoId" name="VehiculoId" @bind="poliza.VehiculoId" required>
-          <option value="">Select a Titular</option>
+          <option value="">Selecciona Vehiculo</option>
           @foreach (var vehiculo in VehiculosList)
           {
             <option value="@vehiculo.Id">@vehiculo.Dominio</option>

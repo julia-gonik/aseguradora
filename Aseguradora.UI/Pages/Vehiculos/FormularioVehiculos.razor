@@ -39,9 +39,9 @@ else
     </div>
 
     <div class="form-group">
-        <label for="TitularId">Select Titular:</label>
+        <label for="TitularId">Selecciona un Titular:</label>
         <select class="form-control" id="TitularId" name="TitularId" @bind="_vehiculo.TitularId" required>
-            <option value="">Select a Titular</option>
+            <option value="">Selecciona un titular</option>
       @foreach (var titular in TitularList)
       {
                       <option value="@titular.Id">@titular.Nombre</option>

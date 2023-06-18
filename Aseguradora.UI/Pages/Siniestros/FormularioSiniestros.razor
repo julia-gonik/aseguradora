@@ -50,7 +50,7 @@
     <div class="form-group">
         <label for="PolizaId">Seleccionar Poliza:</label>
         <select class="form-control" id="PolizaId" name="PolizaId" @bind="siniestro.PolizaId" required>
-          <option value="">Select a Titular</option>
+          <option value="">Selecciona una Poliza</option>
           @foreach (var poliza in PolizasList)
           {
             <option value="@poliza.Id">@poliza.Id</option>
@@ -62,6 +62,11 @@
 
     <button type="submit" @onclick="HandleValidSubmit" class="btn btn-primary">Crear Siniestro</button>
 </EditForm>
+
+  @if (MensajeVisible)
+  {
+    <h6 class="validation-message" style="margin-top: 3rem;">@MensajeError</h6>
+  }
 
 @code {
   [Parameter] public int? Id { get; set; }
@@ -88,11 +93,21 @@
 
   // Guardado
   Siniestro siniestro = new Siniestro();
+  private bool MensajeVisible = false;
+  public string MensajeError {get; set;} = "";   
   private void HandleValidSubmit()
   {
     if (_esNuevoSiniestro)
     {
-      AgregarSiniestroUseCase.Ejecutar(siniestro);
+      try 
+      {
+        AgregarSiniestroUseCase.Ejecutar(siniestro);
+      } catch (SiniestroFueraDeVigenciaException) {
+        MensajeError = "Seguro No vigente";
+        MensajeVisible = true;
+        StateHasChanged();
+        return;
+      }
     } 
     else 
     {

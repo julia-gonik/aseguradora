@@ -22,16 +22,19 @@
     {
         get;
         set;
-    } = ""; [Parameter] public EventCallback OnConfirmado { get; set; }
+    } = ""; 
+    [Parameter] public EventCallback OnConfirmado { get; set; }
     void
         CerrarYConfirmar()
     { visible = false; OnConfirmado.InvokeAsync(); }
-    public void
-        Mostrar()
-    { visible = true; StateHasChanged(); }
+    
+    public void Mostrar()
+    { 
+        visible = true; 
+        StateHasChanged(); 
+    }
     void Cerrar()
     {
-        visible =
-        false;
+        visible = false;
     }
 } 
