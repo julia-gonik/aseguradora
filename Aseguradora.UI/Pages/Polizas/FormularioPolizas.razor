@@ -1,10 +1,13 @@
 @page "/poliza/{Id:int?}"
 @inject NavigationManager Navegador;
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+
 @inject AgregarPolizaUseCase AgregarPolizaUseCase;
 @inject ModificarPolizaUseCase ModificarPolizaUseCase;
 @inject ObtenerPolizaUseCase ObtenerPolizaUseCase;
 @inject ObtenerVehiculoUseCase ObtenerVehiculoUseCase;
-@inject ListarVehiculoesUseCase ListarVehiculoesUseCase;
+@inject ListarVehiculosUseCase ListarVehiculosUseCase;
 
 <PageTitle>Polizas</PageTitle>
 
@@ -14,45 +17,66 @@
   }
   else
   {
-    <h3>Modificando a la Poliza del vehiculo "@_poliza.Vehiculo"</h3>
+    <h3>Modificando Poliza</h3>
   }
- <form>
-    <div class="form-group">
-      <label for="dominio">Dominio</label>
-      <input type="text" id="dominio" @bind="_poliza.Dominio" name="dominio" required>
-    </div>
-    <div class="form-group">
-      <label for="marca">Marca</label>
-      <input type="text" id="marca" name="marca" @bind="_poliza.Marca" required>
-    </div>
-    <div class="form-group">
-      <label for="anioFabricacion">Año de Fabricación</label>
-      <input type="number" id="anioFabricacion" name="anioFabricacion" @bind="_poliza.AnioFabricacion" required>
-    </div>
 
-    @* <div class="form-group">
-      <label for="titularid">Titular</label>
-      <input type="number" id="titularid" name="titularid" @bind="_poliza.TitularId" required>
-    </div> *@
+<EditForm Model="@poliza" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
 
     <div class="form-group">
-        <label for="TitularId">Select Titular:</label>
-        <select class="form-control" id="TitularId" name="TitularId" @bind="_poliza.TitularId" required>
-            <option value="">Select a Titular</option>
-            @foreach (var titular in TitularList)
-            {
-                <option value="@titular.Id">@titular.Nombre</option>
-            }
+        <label for="valorAsegurado">Valor Asegurado</label>
+        <InputNumber id="valorAsegurado" class="form-control" @bind-Value="@poliza.ValorAsegurado" />
+        <ValidationMessage For="@(() => poliza.ValorAsegurado)" />
+    </div>
+
+    <div class="form-group">
+        <label for="franquicia">Franquicia</label>
+        <InputText id="franquicia" class="form-control" @bind-Value="@poliza.Franquicia" />
+        <ValidationMessage For="@(() => poliza.Franquicia)" />
+    </div>
+
+    <div class="form-group">
+        <label for="tipoCobertura">Tipo de Cobertura</label>
+        <select id="tipoCobertura" class="form-control" @bind="@poliza.TipoCobertura">
+            <option value="ResponsabilidadCivil">Responsabilidad Civil</option>
+            <option value="TodoRiesgo">Todo Riesgo</option>
         </select>
+        <ValidationMessage For="@(() => poliza.TipoCobertura)" />
     </div>
-   
-    <button class="btn btn-primary btn-block mb-4" @onclick="Guardar">Guardar Poliza</button>
-  </form>
 
+    <div class="form-group">
+        <label for="fechaInicioVigencia">Fecha de Inicio de Vigencia</label>
+        <InputDate id="fechaInicioVigencia" class="form-control" @bind-Value="@poliza.FechaInicioVigencia" />
+        <ValidationMessage For="@(() => poliza.FechaInicioVigencia)" />
+    </div>
+
+    <div class="form-group">
+        <label for="fechaFinVigencia">Fecha de Fin de Vigencia</label>
+        <InputDate id="fechaFinVigencia" class="form-control" @bind-Value="@poliza.FechaFinVigencia" />
+        <ValidationMessage For="@(() => poliza.FechaFinVigencia)" />
+    </div>
+
+    <div class="form-group">
+        <label for="VehiculoId">Seleccionar Vehiculo:</label>
+        <select class="form-control" id="VehiculoId" name="VehiculoId" @bind="poliza.VehiculoId" required>
+          <option value="">Select a Titular</option>
+          @foreach (var vehiculo in VehiculosList)
+          {
+            <option value="@vehiculo.Id">@vehiculo.Dominio</option>
+          }
+        </select>
+        <ValidationMessage For="@(() => poliza.VehiculoId)" />
+    </div>
+
+
+    <button type="submit" @onclick="HandleValidSubmit" class="btn btn-primary">Crear Poliza</button>
+</EditForm>
 
 @code {
   [Parameter] public int? Id { get; set; }
   bool _esNuevaPoliza = true;
+
+  // Formulario
   protected override void OnParametersSet()
   {
     if (Id != null)
@@ -60,29 +84,31 @@
       var polizaHallada = ObtenerPolizaUseCase.Ejecutar(Id.Value);
       if (polizaHallada != null)
       {
-        _poliza = polizaHallada;
+        poliza = polizaHallada;
         _esNuevaPoliza=false;
       }
     }
   }
-  List<Titular> TitularList = new List<Titular>();
+  List<Vehiculo> VehiculosList = new List<Vehiculo>();
   protected override void OnInitialized()
   {
-    TitularList = ListarTitularesUseCase.Ejecutar();
+    VehiculosList = ListarVehiculosUseCase.Ejecutar();
   }
-  Poliza _poliza = new Poliza();
-  void Guardar()
+
+  // Guardado
+  Poliza poliza = new Poliza();
+  private void HandleValidSubmit()
   {
     if (_esNuevaPoliza)
     {
-      AgregarPolizaUseCase.Ejecutar(_poliza);
+      AgregarPolizaUseCase.Ejecutar(poliza);
     } 
     else 
     {
-      ModificarPolizaUseCase.Ejecutar(_poliza);
+      ModificarPolizaUseCase.Ejecutar(poliza);
     }
 
-    _poliza = new Poliza();
+    poliza = new Poliza();
     Navegador.NavigateTo("polizas");
   }
 }

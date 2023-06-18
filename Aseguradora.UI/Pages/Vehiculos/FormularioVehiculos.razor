@@ -19,31 +19,30 @@ else
  <form>
     <div class="form-group">
       <label for="dominio">Dominio</label>
-      <input type="text" id="dominio" @bind="_vehiculo.Dominio" name="dominio" required>
+      <InputText id="dominio" class="form-control" @bind-Value="@_vehiculo.Dominio" />
+      <ValidationMessage For="@(() => _vehiculo.Dominio)" />
     </div>
     <div class="form-group">
       <label for="marca">Marca</label>
-      <input type="text" id="marca" name="marca" @bind="_vehiculo.Marca" required>
+      <InputText id="marca" class="form-control" @bind-Value="@_vehiculo.Marca" />
+      <ValidationMessage For="@(() => _vehiculo.Marca)" />
     </div>
     <div class="form-group">
       <label for="anioFabricacion">Año de Fabricación</label>
-      <input type="number" id="anioFabricacion" name="anioFabricacion" @bind="_vehiculo.AnioFabricacion" required>
+      <InputText id="anioFabricacion" class="form-control" @bind-Value="@_vehiculo.AnioFabricacion" />
+      <ValidationMessage For="@(() => _vehiculo.AnioFabricacion)" />
     </div>
-
-  @* <div class="form-group">
-      <label for="titularid">Titular</label>
-      <input type="number" id="titularid" name="titularid" @bind="_vehiculo.TitularId" required>
-    </div> *@
 
     <div class="form-group">
         <label for="TitularId">Select Titular:</label>
         <select class="form-control" id="TitularId" name="TitularId" @bind="_vehiculo.TitularId" required>
             <option value="">Select a Titular</option>
-      @foreach (var titular in TitularList)
-      {
-                  <option value="@titular.Id">@titular.Nombre</option>
-      }
+            @foreach (var titular in TitularList)
+            {
+              <option value="@titular.Id">@titular.Nombre</option>
+            }
         </select>
+      <ValidationMessage For="@(() => _vehiculo.TitularId)" />
     </div>
 
     <button type="submit" class="btn btn-primary btn-block mb-4" @onclick="Guardar">Guardar vehiculo</button>

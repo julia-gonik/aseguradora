@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Aseguradora.Aplicacion;
 namespace Aseguradora.Repositorios;
 
-public class RepositorioVehiculoTXT : IRepositorioVehiculo
+public class RepositorioVehiculo : IRepositorioVehiculo
 {
     public void AgregarVehiculo(Vehiculo vehiculo)
     {

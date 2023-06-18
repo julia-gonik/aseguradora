@@ -1,0 +1,94 @@
+﻿@page "/terceros"
+@inject NavigationManager Navegador;
+@inject ListarTercerosUseCase ListarTercerosUseCase;
+@inject EliminarTerceroUseCase EliminarTerceroUseCase;
+
+<PageTitle>Terceros</PageTitle>
+
+<h1 style="margin-bottom: 20px;">Terceros</h1>
+
+<button type="button" class="btn btn-primary btn-block mb-4" @onclick="CrearTercero">
+   <span class="oi oi-plus"></span>
+   Crear Tercero
+  </button>
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>DNI</th>
+      <th>Teléfono</th>
+      <th>Nombre Aseguradora</th>
+      <th>Siniestro</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    @foreach (var tercero in terceros)
+    {
+      <tr>
+        <td>@tercero.Id</td>
+        <td>@tercero.Nombre</td>
+        <td>@tercero.DNI</td>
+        <td>@tercero.Telefono</td>
+        <td>@tercero.NombreAseguradora</td>
+        <td>@tercero.Siniestro?.Id</td>
+        <td>
+          <div class="action-icons">
+            <button class="btn btn-primary" @onclick="()=>ModificarTercero(tercero)" >
+              <span class="oi oi-pencil" ></span>
+            </button>
+            <button class="btn btn-danger" @onclick="() => MostarDialogoDeEliminar(tercero)">
+              <span class="oi oi-trash" ></span>
+            </button>
+          </div>
+          <DialogoConfirmacion 
+            @ref=dialogo 
+            Mensaje="¿Estas seguro que deseas borrar la tercero?"
+            OnConfirmado=EliminarTercero />
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+@code {
+  DialogoConfirmacion dialogo = null!;
+  List<Tercero> terceros = new List<Tercero>();
+  Tercero? _terceroAEliminar = null;
+  
+  private void EliminarTercero() {
+    if (_terceroAEliminar != null) {
+      EliminarTerceroUseCase.Ejecutar(_terceroAEliminar.Id);
+      terceros = ListarTercerosUseCase.Ejecutar();
+    }
+  }
+
+  protected override void OnInitialized()
+  {
+    terceros = ListarTercerosUseCase.Ejecutar();
+  }
+
+  void CrearTercero()
+  {
+    Navegador.NavigateTo("tercero");
+  }
+
+  void ModificarTercero(Tercero tercero)
+  {
+    Navegador.NavigateTo($"tercero/{tercero.Id}");
+  }
+
+  void IrATerceros(Tercero tercero)
+  {
+    Navegador.NavigateTo($"tercero/{tercero.Id}/terceros");
+  }
+  
+  void MostarDialogoDeEliminar(Tercero p) {
+    _terceroAEliminar = p;
+    
+    dialogo.Mostrar();
+  }
+}

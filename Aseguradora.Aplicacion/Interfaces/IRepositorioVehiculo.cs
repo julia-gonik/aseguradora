@@ -6,5 +6,6 @@ namespace Aseguradora.Aplicacion
         void ModificarVehiculo(Vehiculo vehiculo);
         void EliminarVehiculo(int id);
         List<Vehiculo> ListarVehiculos();
+        Vehiculo? ObtenerVehiculo(int id);
     }
 }

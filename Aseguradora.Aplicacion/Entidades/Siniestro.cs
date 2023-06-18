@@ -1,13 +1,19 @@
+using System.ComponentModel.DataAnnotations;
 namespace Aseguradora.Aplicacion;
 
 public class Siniestro
 {
     public int Id { get; set; }
+    [Required]
     public int PolizaId { get; set; }
     public Poliza? Poliza { get; set; }
+    [Required]
     public DateTime FechaIngreso { get; set; }
+    [Required]
     public DateTime FechaOcurrencia { get; set; }
+    [Required]
     public string Direccion { get; set; } = "";
+    [Required]
     public string Descripcion { get; set; } = "";
 
     public Siniestro()

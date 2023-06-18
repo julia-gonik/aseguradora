@@ -1,0 +1,106 @@
+@page "/tercero/{Id:int?}"
+@inject NavigationManager Navegador;
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject AgregarTerceroUseCase AgregarTerceroUseCase;
+@inject ModificarTerceroUseCase ModificarTerceroUseCase;
+@inject ObtenerTerceroUseCase ObtenerTerceroUseCase;
+@inject ObtenerSiniestroUseCase ObtenerSiniestroUseCase;
+@inject ListarSiniestrosUseCase ListarSiniestrosUseCase;
+
+<PageTitle>Terceros</PageTitle>
+
+ @if (_esNuevoTercero)
+  {
+    <h3>Agregando un nuevo tercero</h3>
+  }
+  else
+  {
+    <h3>Modificando Tercero</h3>
+  }
+
+<EditForm Model="@tercero" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label for="dni">DNI</label>
+        <InputText id="dni" class="form-control" @bind-Value="@tercero.DNI"/>
+        <ValidationMessage For="@(() => @tercero.DNI)" />
+    </div>
+
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <InputText id="nombre" class="form-control" @bind-Value="@tercero.Nombre" />
+        <ValidationMessage For="@(() => tercero.Nombre)" />
+    </div>
+ 
+    <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <InputText id="telefono" class="form-control" @bind-Value="@tercero.Telefono" />
+        <ValidationMessage For="@(() => tercero.Telefono)" />
+    </div>
+
+    <div class="form-group">
+        <label for="nombreAseguradora">Nombre de la Aseguradora</label>
+        <InputText id="nombreAseguradora" class="form-control" @bind-Value="@tercero.NombreAseguradora" />
+        <ValidationMessage For="@(() => tercero.NombreAseguradora)" />
+    </div>
+    
+    <div class="form-group">
+        <label for="siniestroId">Siniestro</label>
+        <select id="siniestroId" class="form-control" @bind="@tercero.SiniestroId">
+          <option value="">Seleciona un siniestro</option>
+          @foreach (var siniestro in SiniestrosList)
+          {
+            <option value="@siniestro.Id">@siniestro.Id</option>
+          }
+        </select>
+        <ValidationMessage For="@(() => tercero.SiniestroId)" />
+    </div>
+
+    
+
+    <button type="submit" @onclick="Guardar" class="btn btn-primary">Guardar Tercero</button>
+</EditForm>
+
+@code {
+  [Parameter] public int? Id { get; set; }
+  bool _esNuevoTercero = true;
+
+  // Formulario
+  protected override void OnParametersSet()
+  {
+    if (Id != null)
+    {
+      var terceroHallada = ObtenerTerceroUseCase.Ejecutar(Id.Value);
+      if (terceroHallada != null)
+      {
+        tercero = terceroHallada;
+        _esNuevoTercero=false;
+      }
+    }
+  }
+  List<Siniestro> SiniestrosList = new List<Siniestro>();
+  protected override void OnInitialized()
+  {
+    SiniestrosList = ListarSiniestrosUseCase.Ejecutar();
+  }
+
+  // Guardado
+  Tercero tercero = new Tercero();
+  private void Guardar()
+  {
+    if (_esNuevoTercero)
+    {
+      AgregarTerceroUseCase.Ejecutar(tercero);
+    } 
+    else 
+    {
+      ModificarTerceroUseCase.Ejecutar(tercero);
+    }
+
+    tercero = new Tercero();
+    Navegador.NavigateTo("terceros");
+  }
+}

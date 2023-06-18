@@ -3,7 +3,7 @@ using Aseguradora.Aplicacion;
 namespace Aseguradora.Repositorios;
 
 
-public class RepositorioPolizaTXT : IRepositorioPoliza
+public class RepositorioPoliza : IRepositorioPoliza
 {
     public void AgregarPoliza(Poliza poliza)
     {

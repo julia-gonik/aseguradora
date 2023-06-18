@@ -6,7 +6,9 @@ namespace Aseguradora.Aplicacion;
 
 public class Titular : Persona
 {
+    [Required]
     public string Direccion { get; set; } = "";
+    [Required]
     public string CorreoElectronico { get; set; } = "";
     public virtual List<Vehiculo> Vehiculos { get; set; } = new List<Vehiculo>();
 

@@ -3,7 +3,7 @@ using Aseguradora.Aplicacion;
 
 namespace Aseguradora.Repositorios
 {
-    public class RepositorioTitularTXT : IRepositorioTitular
+    public class RepositorioTitular : IRepositorioTitular
     {
         public void AgregarTitular(Titular titular)
         {

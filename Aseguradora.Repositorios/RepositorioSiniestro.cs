@@ -5,8 +5,6 @@ namespace Aseguradora.Repositorios;
 
 public class RepositorioSiniestro : IRepositorioSiniestro
 {
-    readonly string _nombreArch = "siniestros.txt";
-
     public void AgregarSiniestro(Siniestro siniestro)
     {
         using (var db = new AseguradoraContext())
