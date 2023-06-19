@@ -111,7 +111,14 @@
     } 
     else 
     {
-      ModificarSiniestroUseCase.Ejecutar(siniestro);
+      try{
+        ModificarSiniestroUseCase.Ejecutar(siniestro);
+      }catch(SiniestroFueraDeVigenciaException){
+        MensajeError = "Seguro No vigente";
+        MensajeVisible = true;
+        StateHasChanged();
+        return;
+      }
     }
 
     siniestro = new Siniestro();
