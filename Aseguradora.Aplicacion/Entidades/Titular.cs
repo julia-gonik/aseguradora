@@ -6,9 +6,9 @@ namespace Aseguradora.Aplicacion;
 
 public class Titular : Persona
 {
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public string Direccion { get; set; } = "";
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public string CorreoElectronico { get; set; } = "";
     public virtual List<Vehiculo> Vehiculos { get; set; } = new List<Vehiculo>();
 

@@ -3,9 +3,9 @@ namespace Aseguradora.Aplicacion;
 
 public class Tercero : Persona
 {
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public string NombreAseguradora { get; set; } = "";
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public int SiniestroId { get; set; }
     public Siniestro? Siniestro { get; set; }
 

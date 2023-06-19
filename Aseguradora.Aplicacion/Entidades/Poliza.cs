@@ -4,19 +4,17 @@ namespace Aseguradora.Aplicacion;
 public class Poliza
 {
     public int Id { get; set; }
-    [Required(ErrorMessage = "Vehiculo es necesario")]
     public int VehiculoId { get; set; }
-    [Required]
     public Vehiculo? Vehiculo { get; set; }
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public double ValorAsegurado { get; set; }
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public string Franquicia { get; set; } = "";
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public TipoCobertura TipoCobertura { get; set; }
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public DateTime FechaInicioVigencia { get; set; }
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public DateTime FechaFinVigencia { get; set; }
 
     public override string ToString()

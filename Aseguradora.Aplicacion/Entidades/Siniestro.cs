@@ -4,16 +4,15 @@ namespace Aseguradora.Aplicacion;
 public class Siniestro
 {
     public int Id { get; set; }
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public int PolizaId { get; set; }
     public Poliza? Poliza { get; set; }
-    [Required]
     public DateTime FechaIngreso { get; set; }
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public DateTime FechaOcurrencia { get; set; }
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public string Direccion { get; set; } = "";
-    [Required]
+    [Required(ErrorMessage = "El campo es requerido")]
     public string Descripcion { get; set; } = "";
 
     public Siniestro()

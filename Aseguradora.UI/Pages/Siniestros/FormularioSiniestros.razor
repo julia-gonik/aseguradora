@@ -24,7 +24,7 @@
     <DataAnnotationsValidator />
 
     <div class="form-group">
-        <label for="descripcion">Valor Asegurado</label>
+        <label for="descripcion">Descripcion</label>
         <InputText id="descripcion" class="form-control" @bind-Value="@siniestro.Descripcion" />
         <ValidationMessage For="@(() => siniestro.Descripcion)" />
     </div>
@@ -42,12 +42,6 @@
     </div>
 
     <div class="form-group">
-        <label for="FechaIngreso">Fecha de Ingreso</label>
-        <InputDate id="FechaIngreso" class="form-control" @bind-Value="@siniestro.FechaIngreso" />
-        <ValidationMessage For="@(() => siniestro.FechaIngreso)" />
-    </div>
-
-    <div class="form-group">
         <label for="PolizaId">Seleccionar Poliza:</label>
         <select class="form-control" id="PolizaId" name="PolizaId" @bind="siniestro.PolizaId" required>
           <option value="">Selecciona una Poliza</option>
@@ -60,7 +54,7 @@
     </div>
 
 
-    <button type="submit" @onclick="HandleValidSubmit" class="btn btn-primary">Crear Siniestro</button>
+    <button type="submit" class="btn btn-primary">Crear Siniestro</button>
 </EditForm>
 
   @if (MensajeVisible)
@@ -95,6 +89,7 @@
   Siniestro siniestro = new Siniestro();
   private bool MensajeVisible = false;
   public string MensajeError {get; set;} = "";   
+  
   private void HandleValidSubmit()
   {
     if (_esNuevoSiniestro)
@@ -108,12 +103,14 @@
         StateHasChanged();
         return;
       }
-    } 
+    }
     else 
     {
-      try{
+      try {
         ModificarSiniestroUseCase.Ejecutar(siniestro);
-      }catch(SiniestroFueraDeVigenciaException){
+      }
+      catch(SiniestroFueraDeVigenciaException)
+      {
         MensajeError = "Seguro No vigente";
         MensajeVisible = true;
         StateHasChanged();
